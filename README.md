@@ -171,5 +171,19 @@ sudo systemctl enable --now usb-gadget-hid.service
 systemctl status usb-gadget-hid.service --no-pager
 ```
 You should see **active** and **enabled** in green (if your terminal supports colors)
-<br>
+<br><br>
+
+Verify all is working, on the PI Zero
+```
+sudo reboot
+```
+then re-connect and execute:
+```
+cat /sys/kernel/config/usb_gadget/g1/UDC
+```
+If all is working, you should see an output similar to **3f980000.usb**<br><br>
+
+
+
+
 
