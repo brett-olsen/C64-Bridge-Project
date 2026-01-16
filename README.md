@@ -10,6 +10,8 @@ This project is designed to allow for the remote transmission of keyboard stroke
 1 x micro-USB data cable<br>
 1 x OTG micro-USB shim<br>
 1 x micro SD card (at least 4gb)<br><br>
+****IMPORTANT** on the Raspberry PI Zero W2, the ports are in the following order : POWER - DATA - HDMI**<br>
+During the configuration stages, it's totally fine to use the first port, power. When Gadget mode is enabled, and for HID/Keyboard emulation, you need to use the Data Port, this is the middle port, please also take some time to read the connections information below.
 
 Optional<br>
 1 x micro-USB cable for power/setup<br><br>
@@ -138,6 +140,37 @@ echo "UP: bound to UDC=$UDC"
 SH
 
 sudo chmod +x /usr/local/sbin/gadget-hid-up.sh
+```
+<br>
+
+Now create the gadget hid down script, /usr/local/sbin/gadget-hid-down.sh manually or via the following script
+```
+sudo tee /usr/local/sbin/gadget-hid-down.sh >/dev/null <<'SH'
+#!/usr/bin/env bash
+set -euo pipefail
+G=/sys/kernel/config/usb_gadget/g1
+[ -d "$G" ] || exit 0
+
+# Unbind if bound
+if [ -f "$G/UDC" ]; then
+  echo "" > "$G/UDC" || true
+fi
+
+# Remove symlinks first
+rm -f "$G/configs/c.1/hid.usb0" 2>/dev/null || true
+rm -f "$G/configs/c.1/acm.usb0" 2>/dev/null || true
+
+# Remove functions/config/strings
+rm -rf "$G/functions/hid.usb0" "$G/functions/acm.usb0" 2>/dev/null || true
+rm -rf "$G/configs/c.1/strings/0x409" "$G/strings/0x409" 2>/dev/null || true
+rm -rf "$G/configs/c.1" 2>/dev/null || true
+
+# Remove gadget dir
+cd /sys/kernel/config/usb_gadget || exit 0
+rmdir g1 2>/dev/null || true
+SH
+
+sudo chmod +x /usr/local/sbin/gadget-hid-down.sh
 ```
 <br>
 
