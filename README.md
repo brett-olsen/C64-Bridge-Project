@@ -26,5 +26,27 @@ When flashing the Pi OS be sure to set the following:<br>
 - Enable: SSH (if asked, I used password authentication)<br>
 - Configure Wi-FI with a SSID/password, set your country<br>
 - Set a username/password<br><br>
-When the flashing of the PI Os image has completed, insert the SD card and power on the PI.<br>
+When the flashing of the PI Os image has completed, insert the SD card and power on the PI.<br><br>
+
+**2) Getting the PI Zero 2 W Running**<br>
+Note: First boot of the PI Zero 2 W may take some time, be paitent =)<br><br>
+Find the IP address of the PI Zero from your router, or if MDNS works SSH into your PI Zero
+```
+ssh <user>@PiZero2W.local
+# or
+ssh <user>@<pi-ip>
+```
+<br>
+
+Update all your packages:<br>
+```
+sudo apt update
+sudo apt -y full-upgrade
+sudo reboot
+```
+<br>
+
+
+
+
 
