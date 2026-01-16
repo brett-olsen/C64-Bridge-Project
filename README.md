@@ -11,4 +11,17 @@ This project is designed to allow for the remote transmission of keyboard stroke
 1 x micro SD card (at least 4gb)<br><br>
 
 Optional<br>
-1 x micro-USB cable for power/setup<br>
+1 x micro-USB cable for power/setup<br><br>
+
+# Getting it up & running<br><br>
+**1) Flash the Raspberry PI OS**<br>
+I personally used the Raspberry PI imager over at https://github.com/raspberrypi/rpi-imager, however any of the popular Raspberry PI flashing tools will work (see https://www.raspberrypi.com/software/), for a number of reasons and for increased compatibility I used the following image:<br><br>
+
+- Raspberry Pi OS Lite (32-bit) (see https://www.raspberrypi.com/software/operating-systems/)<br>
+When flashing the Pi OS be sure to set the following:<br>
+-Hostname: PiZero2W (choose your own, this is what I chose and will be reffered to herein)<br>
+- Enable: SSH<br>
+- Configure Wi-FI with a SSID/password, set your country<br>
+- Set a username/password<br><br>
+When the flashing of the PI Os image has completed, insert the SD card and power on the PI.<br>
+
