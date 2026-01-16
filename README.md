@@ -187,6 +187,13 @@ If all is working, you should see an output similar to **3f980000.usb**, congrat
 **4) Install the PI Network Daemon**<br>
 First we need to create the configuration file for the daemon, this can be tweaked or modified to meet your requirements, or you can just use it "as-is", this is a network service, so do think if this suits your environment. On the PI Zero, create to config as below either manually or via the below script<br>
 
+Getting things ready, on the PI Zero...
+```
+sudo mkdir -p /opt/hid-netd
+sudo chmod 755 /opt/hid-netd
+```
+<br>
+
 ```
 sudo mkdir -p /etc/hid-netd
 sudo tee /etc/hid-netd/config.env >/dev/null <<'ENV'
