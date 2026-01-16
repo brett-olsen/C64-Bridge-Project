@@ -94,17 +94,14 @@ set -euo pipefail
 
 G=/sys/kernel/config/usb_gadget/g1
 
-# Ensure configfs is mounted
 mountpoint -q /sys/kernel/config || mount -t configfs none /sys/kernel/config
-
 modprobe libcomposite >/dev/null 2>&1 || true
 
 mkdir -p "$G"
 cd "$G"
 
-# USB IDs (safe defaults). You can change later.
-echo 0x1d6b > idVendor   # Linux Foundation (common for gadgets)
-echo 0x0104 > idProduct  # Multifunction Composite Gadget
+echo 0x1d6b > idVendor
+echo 0x0104 > idProduct
 
 mkdir -p strings/0x409
 echo "PiZero2W"            > strings/0x409/serialnumber
@@ -115,25 +112,25 @@ mkdir -p configs/c.1/strings/0x409
 echo "Config 1: HID Keyboard (+Serial)" > configs/c.1/strings/0x409/configuration
 echo 250 > configs/c.1/MaxPower
 
-# ---- HID keyboard function ----
+# HID keyboard
 mkdir -p functions/hid.usb0
-echo 1 > functions/hid.usb0/protocol    # keyboard
-echo 1 > functions/hid.usb0/subclass    # boot interface subclass
+echo 1 > functions/hid.usb0/protocol
+echo 1 > functions/hid.usb0/subclass
 echo 8 > functions/hid.usb0/report_length
 
-# Standard 8-byte boot keyboard report descriptor
-cat > functions/hid.usb0/report_desc <<'DESC'
-\x05\x01\x09\x06\xa1\x01\x05\x07\x19\xe0\x29\xe7\x15\x00\x25\x01\x75\x01\x95\x08\x81\x02\x95\x01\x75\x08\x81\x01\x95\x05\x75\x01\x05\x08\x19\x01\x29\x05\x91\x02\x95\x01\x75\x03\x91\x01\x95\x06\x75\x08\x15\x00\x25\x65\x05\x07\x19\x00\x29\x65\x81\x00\xc0
-DESC
+# IMPORTANT: write the report descriptor as RAW BYTES (not literal \xNN text)
+# Standard boot keyboard descriptor (8-byte reports)
+printf '%b' \
+'\x05\x01\x09\x06\xa1\x01\x05\x07\x19\xe0\x29\xe7\x15\x00\x25\x01\x75\x01\x95\x08\x81\x02\x95\x01\x75\x08\x81\x01\x95\x05\x75\x01\x05\x08\x19\x01\x29\x05\x91\x02\x95\x01\x75\x03\x91\x01\x95\x06\x75\x08\x15\x00\x25\x65\x05\x07\x19\x00\x29\x65\x81\x00\xc0' \
+> functions/hid.usb0/report_desc
 
 ln -sf functions/hid.usb0 configs/c.1/
 
-# ---- Optional ACM serial function (handy for debugging) ----
-# Comment these 2 lines out if you *only* want keyboard.
+# Optional ACM serial
 mkdir -p functions/acm.usb0
 ln -sf functions/acm.usb0 configs/c.1/
 
-# Bind to UDC
+# Bind
 UDC="$(ls /sys/class/udc | head -n1)"
 echo "$UDC" > UDC
 
