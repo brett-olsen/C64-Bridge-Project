@@ -82,6 +82,94 @@ after you have rebooted, verify that the config file changes have stayed persist
 ls /sys/class/udc
 ```
 expected output should be something like **3f980000.usb**
+<br><br><br>
+
+**3) Configure USB Gadget mode**<br>
+On the PI Zero, create /usr/local/sbin/gadget-hid-up.sh either manually or using the following script
+```
+sudo tee /usr/local/sbin/gadget-hid-up.sh >/dev/null <<'SH'
+#!/usr/bin/env bash
+set -euo pipefail
+
+G=/sys/kernel/config/usb_gadget/g1
+
+# Ensure configfs is mounted
+mountpoint -q /sys/kernel/config || mount -t configfs none /sys/kernel/config
+
+modprobe libcomposite >/dev/null 2>&1 || true
+
+mkdir -p "$G"
+cd "$G"
+
+# USB IDs (safe defaults). You can change later.
+echo 0x1d6b > idVendor   # Linux Foundation (common for gadgets)
+echo 0x0104 > idProduct  # Multifunction Composite Gadget
+
+mkdir -p strings/0x409
+echo "PiZero2W"            > strings/0x409/serialnumber
+echo "PiZero2W Serial+HID" > strings/0x409/product
+echo "PiZero2W"            > strings/0x409/manufacturer
+
+mkdir -p configs/c.1/strings/0x409
+echo "Config 1: HID Keyboard (+Serial)" > configs/c.1/strings/0x409/configuration
+echo 250 > configs/c.1/MaxPower
+
+# ---- HID keyboard function ----
+mkdir -p functions/hid.usb0
+echo 1 > functions/hid.usb0/protocol    # keyboard
+echo 1 > functions/hid.usb0/subclass    # boot interface subclass
+echo 8 > functions/hid.usb0/report_length
+
+# Standard 8-byte boot keyboard report descriptor
+cat > functions/hid.usb0/report_desc <<'DESC'
+\x05\x01\x09\x06\xa1\x01\x05\x07\x19\xe0\x29\xe7\x15\x00\x25\x01\x75\x01\x95\x08\x81\x02\x95\x01\x75\x08\x81\x01\x95\x05\x75\x01\x05\x08\x19\x01\x29\x05\x91\x02\x95\x01\x75\x03\x91\x01\x95\x06\x75\x08\x15\x00\x25\x65\x05\x07\x19\x00\x29\x65\x81\x00\xc0
+DESC
+
+ln -sf functions/hid.usb0 configs/c.1/
+
+# ---- Optional ACM serial function (handy for debugging) ----
+# Comment these 2 lines out if you *only* want keyboard.
+mkdir -p functions/acm.usb0
+ln -sf functions/acm.usb0 configs/c.1/
+
+# Bind to UDC
+UDC="$(ls /sys/class/udc | head -n1)"
+echo "$UDC" > UDC
+
+echo "UP: bound to UDC=$UDC"
+SH
+
+sudo chmod +x /usr/local/sbin/gadget-hid-up.sh
+```
 <br>
 
+Create a systemd service to bring up the gadget automatically on boot, /etc/systemd/system/usb-gadget-hid.service (again either manually or via the following script)<br>
+
+```
+sudo tee /etc/systemd/system/usb-gadget-hid.service >/dev/null <<'UNIT'
+[Unit]
+Description=USB Gadget (HID Keyboard + optional ACM) for PiZero2W
+After=local-fs.target
+Wants=local-fs.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/local/sbin/gadget-hid-up.sh
+ExecStop=/usr/local/sbin/gadget-hid-down.sh
+
+[Install]
+WantedBy=multi-user.target
+UNIT
+```
+<br>
+
+On the PI Zero, enable and start the service, check for errors as you do this
+```
+sudo systemctl daemon-reload
+sudo systemctl enable --now usb-gadget-hid.service
+systemctl status usb-gadget-hid.service --no-pager
+```
+You should see **active** and **enabled** in green (if your terminal supports colors)
+<br>
 
