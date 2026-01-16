@@ -1,21 +1,21 @@
 # C64-Bridge-Project
-A repo for the C64 Bridge Project, a wireless USB Keyboard/HID emulator for the Raspberry Pi Zero W2, with a Serial Emulator bridge (can be used with the VibeC64 Project, see https://github.com/bbence84/VibeC64)<br><br>
+A repo for the C64 Bridge Project, a wireless USB Keyboard/HID emulator for the Raspberry Pi Zero 2 W, with a Serial Emulator bridge (can be used with the VibeC64 Project, see https://github.com/bbence84/VibeC64)<br><br>
 
 **What is this Project?**<br>
-This project is designed to allow for the remote transmission of keystrokes from a host computer, to the Raspberry Pi Zero W2, which then emulates a USB HID keyboard via gadget mode, and relays those keystrokes to the Commodore C64 Ultimate (see https://www.commodore.net/), while this project can have a myriad of uses, it is specifically designed to be a drop-in, zero-code addition to the VibeC64 Project (see https://github.com/bbence84/VibeC64) this then effectively gives VibeC64 the ability to remotely control the physical C64 Ultimate computer, coupled with a webcam, this allows VibeC64 to monitor, control and test basic applications plus games on a physical C64 Ultimate<br><br>
-**-- Please consider this project very alpha, it just works barely, and i'll add more to it and make it more robust when I get time --**<br><br>
+This project is designed to allow for the remote transmission of keystrokes from a host computer, to the Raspberry Pi Zero 2 W, which then emulates a USB HID keyboard via gadget mode, and relays those keystrokes to the Commodore C64 Ultimate (see https://www.commodore.net/), while this project can have a myriad of uses, it is specifically designed to be a drop-in, zero-code addition to the VibeC64 Project (see https://github.com/bbence84/VibeC64) this then effectively gives VibeC64 the ability to remotely control the physical C64 Ultimate computer, coupled with a webcam, this allows VibeC64 to monitor, control and test basic applications plus games on a physical C64 Ultimate<br><br>
+**-- Please consider this project very alpha, it just works barely, and I’ll add more to it and make it more robust when I get time --**<br><br>
 
 **Hardware**<br>
-1 x Pi Zero 2W<br>
+1 x Pi Zero 2 W<br>
 1 x micro-USB data cable<br>
 1 x OTG micro-USB shim<br>
-1 x micro SD card (at least 4gb)<br><br>
-****IMPORTANT** on the Raspberry Pi Zero W2, the ports are in the following order: POWER - DATA - HDMI**<br>
+1 x micro SD card (at least 4 GB)<br><br>
+****IMPORTANT** on the Raspberry Pi Zero 2 W, the ports are in the following order: POWER - DATA - HDMI**<br>
 During the configuration stages, it's totally fine to use the first port, power. When Gadget mode is enabled, and for HID/Keyboard emulation, you need to use the Data Port, this is the middle port, please also take some time to read the connection information below.
 
 Optional<br>
 1 x micro-USB cable for power/setup<br><br>
-**NOTE: Be careful with physical connections, typically I used a USB power supply or a USB battery pack to keep the PI running during configuration, while I am not an electronics engineer, I believe it is best practice to not have multiple cables connected, for example, do not power the Pi Zero and simultaneously connect a data cable to another computer unless you know what you are doing. During setup, 1 cable for power, during testing and during operation 1 cable for data/power seems to work well for this project. If you want to use two cables safely, I believe you need to ensure that the data cable's 5V is disconnected with either a data-only cable, or a 5V blocker. Be careful with your connections and devices! TL;DR only use 1 cable at a time =)**<br><br>
+**NOTE: Be careful with physical connections, typically I used a USB power supply or a USB battery pack to keep the Pi running during configuration, while I am not an electronics engineer, I believe it is best practice to not have multiple cables connected, for example, do not power the Pi Zero and simultaneously connect a data cable to another computer unless you know what you are doing. During setup, 1 cable for power, during testing and during operation 1 cable for data/power seems to work well for this project. If you want to use two cables safely, I believe you need to ensure that the data cable's 5V is disconnected with either a data-only cable, or a 5V blocker. Be careful with your connections and devices! TL;DR only use 1 cable at a time =)**<br><br>
 
 # Getting it up & running<br><br>
 **1) Flash the Raspberry Pi OS**<br>
@@ -23,17 +23,17 @@ I personally used the Raspberry Pi Imager over at https://github.com/raspberrypi
 
 - Raspberry Pi OS Lite (32-bit) (see https://www.raspberrypi.com/software/operating-systems/)<br>
 When flashing the Pi OS be sure to set the following:<br>
-- Device - If asked, choose the correct device, in this case a Raspberry Pi Zero 2W
+- Device - If asked, choose the correct device, in this case a Raspberry Pi Zero 2 W
 - If the flashing app has the option, you may need to choose other OS or choose the image you downloaded, again ensure it is the Pi OS Lite 32-bit
 - Hostname: PiZero2W (choose your own, this is what I chose and will be referred to herein)<br>
 - Enable: SSH (if asked, I used password authentication)<br>
-- Configure Wi-Fi with a SSID/password, set your country<br>
+- Configure Wi-Fi with an SSID/password, set your country<br>
 - Set a username/password<br><br>
 When the flashing of the Pi OS image has completed, insert the SD card and power on the Pi.<br><br>
 
-**2) Getting the Pi Zero 2W Running**<br>
-Note: First boot of the Pi Zero 2W may take some time, be patient =)<br><br>
-Find the IP address of the PI Zero from your router, or if mDNS works SSH into your Pi Zero
+**2) Getting the Pi Zero 2 W Running**<br>
+Note: First boot of the Pi Zero 2 W may take some time, be patient =)<br><br>
+Find the IP address of the Pi Zero from your router, or if mDNS works SSH into your Pi Zero
 ```
 ssh <user>@PiZero2W.local
 # or
@@ -88,7 +88,7 @@ expected output should be something like **3f980000.usb**
 <br><br><br>
 
 **3) Configure USB gadget mode**<br>
-On the PI Zero, create /usr/local/sbin/gadget-hid-up.sh either manually or using the following script
+On the Pi Zero, create /usr/local/sbin/gadget-hid-up.sh either manually or using the following script
 ```
 sudo tee /usr/local/sbin/gadget-hid-up.sh >/dev/null <<'SH'
 #!/usr/bin/env bash
@@ -195,7 +195,7 @@ UNIT
 ```
 <br>
 
-On the PI Zero, enable and start the service, check for errors as you do this
+On the Pi Zero, enable and start the service, check for errors as you do this
 ```
 sudo systemctl daemon-reload
 sudo systemctl enable --now usb-gadget-hid.service
@@ -204,7 +204,7 @@ systemctl status usb-gadget-hid.service --no-pager
 You should see **active** and **enabled** in green (if your terminal supports colors)
 <br><br>
 
-Verify all is working, on the PI Zero
+Verify all is working, on the Pi Zero
 ```
 sudo reboot
 ```
@@ -215,10 +215,10 @@ cat /sys/kernel/config/usb_gadget/g1/UDC
 If all is working, you should see an output similar to **3f980000.usb**, Congrats USB Gadget mode is enabled, that’s the hard part done!<br><br>
 <br>
 
-**4) Install the PI Network Daemon**<br>
-First we need to create the Network daemon on the PI Zero, then we will create a config file, setup a network service so everything runs after boot.<br>
+**4) Install the Pi Network Daemon**<br>
+First we need to create the Network daemon on the Pi Zero, then we will create a config file, setup a network service so everything runs after boot.<br>
 
-Install the Network Daemon on the PI Zero 
+Install the Network Daemon on the Pi Zero 
 ```
 sudo mkdir -p /opt/hid-netd
 
@@ -372,14 +372,14 @@ PY
 sudo chmod 755 /opt/hid-netd/hid_netd.py
 ```
 
-Getting things ready to run as a service, on the PI Zero...
+Getting things ready to run as a service, on the Pi Zero...
 ```
 sudo mkdir -p /opt/hid-netd
 sudo chmod 755 /opt/hid-netd
 ```
 <br>
 
-Create the configuration file for the daemon, this can be tweaked or modified to meet your requirements, or you can just use it "as-is", this is a network service, so do think if this suits your environment. On the PI Zero, create the config as below either manually or via the below script
+Create the configuration file for the daemon, this can be tweaked or modified to meet your requirements, or you can just use it "as-is", this is a network service, so do think if this suits your environment. On the Pi Zero, create the config as below either manually or via the below script
 ```
 sudo mkdir -p /etc/hid-netd
 sudo tee /etc/hid-netd/config.env >/dev/null <<'ENV'
@@ -426,11 +426,11 @@ Now enable and start the service
 ```
 sudo reboot
 ```
-Re-connect to your PI Zero via SSH, then validate the following
+Re-connect to your Pi Zero via SSH, then validate the following
 ```
 systemctl status usb-gadget-hid.service --no-pager
 systemctl status hid-netd.service --no-pager
 cat /sys/kernel/config/usb_gadget/g1/UDC
 ```
-you should see lots of green text saying **active** and **enabled** if you do, then you have completed the PI Zero portion of the setup and the hardest part is all done =)
+you should see lots of green text saying **active** and **enabled** if you do, then you have completed the Pi Zero portion of the setup and the hardest part is all done =)
 
