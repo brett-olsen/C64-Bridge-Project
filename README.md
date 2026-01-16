@@ -12,7 +12,7 @@ This project is designed to allow for the remote transmission of keyboard stroke
 
 Optional<br>
 1 x micro-USB cable for power/setup<br><br>
-**NOTE: Be careful with physical connections, typically I used a USB powersupply or a USB battery pack to keep the PI running during configuration, while I am not an electronics engineer, I believe it is best practice to not have multiple cables connected, for example, do not power the Pi Zero and simultaniously connect a data cable to another computer unless you know what you are doing. During set-up, 1 cable for power, during testing and operation 1 cable for data/power seems to work well for this project. Be careful with your connections and devices!**<br><br>
+**NOTE: Be careful with physical connections, typically I used a USB powersupply or a USB battery pack to keep the PI running during configuration, while I am not an electronics engineer, I believe it is best practice to not have multiple cables connected, for example, do not power the Pi Zero and simultaniously connect a data cable to another computer unless you know what you are doing. During set-up, 1 cable for power, during testing and during operation 1 cable for data/power seems to work well for this project. Be careful with your connections and devices! TLDR only use 1 cable at a time =)**<br><br>
 
 # Getting it up & running<br><br>
 **1) Flash the Raspberry PI OS**<br>
