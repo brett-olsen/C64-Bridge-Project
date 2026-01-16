@@ -62,7 +62,7 @@ dtoverlay=dwc2,dr_mode=peripheral
 ```
 <br>
 
-ensure the required kernel modules load at boot
+Ensure the required kernel modules load at boot
 ```
 echo -e "dwc2\nlibcomposite" | sudo tee /etc/modules-load.d/usb-gadget.conf >/dev/null
 ```
@@ -208,7 +208,7 @@ Verify all is working, on the Pi Zero
 ```
 sudo reboot
 ```
-then re-connect and execute:
+then reconnect and execute:
 ```
 cat /sys/kernel/config/usb_gadget/g1/UDC
 ```
@@ -426,7 +426,7 @@ Now enable and start the service
 ```
 sudo reboot
 ```
-Re-connect to your Pi Zero via SSH, then validate the following
+Reconnect to your Pi Zero via SSH, then validate the following
 ```
 systemctl status usb-gadget-hid.service --no-pager
 systemctl status hid-netd.service --no-pager
