@@ -12,6 +12,7 @@ This project is designed to allow for the remote transmission of keyboard stroke
 
 Optional<br>
 1 x micro-USB cable for power/setup<br><br>
+**NOTE: Be careful with physical connections, typically I used a USB powersupply or a USB battery pack to keep the PI running during configuration, while I am not an electronics engineer, I believe it is best practice to not have multiple cables connected, for example, do not power the Pi Zero and simultaniously connect a data cable to another computer unless you know what you are doing. During set-up, 1 cable for power, during testing and operation 1 cable for data/power seems to work well for this project. Be careful with your connections and devices!**<br><br>
 
 # Getting it up & running<br><br>
 **1) Flash the Raspberry PI OS**<br>
@@ -19,8 +20,10 @@ I personally used the Raspberry PI imager over at https://github.com/raspberrypi
 
 - Raspberry Pi OS Lite (32-bit) (see https://www.raspberrypi.com/software/operating-systems/)<br>
 When flashing the Pi OS be sure to set the following:<br>
--Hostname: PiZero2W (choose your own, this is what I chose and will be reffered to herein)<br>
-- Enable: SSH<br>
+- Device - If asked, choose the correct device, in this case a Raspberry Pi Zero 2 W
+- If the flashing app has the option, you may need to choose other OS or choose the image you downloaded, again ensure it is the Pi OS Lite 32 bit
+- Hostname: PiZero2W (choose your own, this is what I chose and will be reffered to herein)<br>
+- Enable: SSH (if asked, I used password authentication)<br>
 - Configure Wi-FI with a SSID/password, set your country<br>
 - Set a username/password<br><br>
 When the flashing of the PI Os image has completed, insert the SD card and power on the PI.<br>
