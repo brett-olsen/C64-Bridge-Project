@@ -401,5 +401,5 @@ systemctl status usb-gadget-hid.service --no-pager
 systemctl status hid-netd.service --no-pager
 cat /sys/kernel/config/usb_gadget/g1/UDC
 ```
-
+you should see lots of green text saying **active** and **enabled** if you do, then you have completed the PI Zero portion of the setup and the hardest part is all done =)
 
