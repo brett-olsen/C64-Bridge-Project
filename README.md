@@ -185,15 +185,170 @@ If all is working, you should see an output similar to **3f980000.usb**, congrat
 <br>
 
 **4) Install the PI Network Daemon**<br>
-First we need to create the configuration file for the daemon, this can be tweaked or modified to meet your requirements, or you can just use it "as-is", this is a network service, so do think if this suits your environment. On the PI Zero, create to config as below either manually or via the below script<br>
+First we need to create the Network Daemmon on the PI Zero, then we will create a config file, setup a network service so everything runs after boot.<br>
 
-Getting things ready, on the PI Zero...
+Install the Network Daemon on the PI Zero 
+```
+sudo mkdir -p /opt/hid-netd
+
+sudo tee /opt/hid-netd/hid_netd.py >/dev/null <<'PY'
+#!/usr/bin/env python3
+import os
+import json
+import socket
+import sys
+from typing import Dict, Optional
+
+# --- Config from env (systemd EnvironmentFile sets these) ---
+LISTEN = os.getenv("HID_NETD_LISTEN", "0.0.0.0")
+PORT   = int(os.getenv("HID_NETD_PORT", "9999"))
+TOKEN  = os.getenv("HID_NETD_TOKEN", "ILoveMyCommodoreC64")
+HIDDEV = os.getenv("HID_DEVICE", "/dev/hidg0")
+
+# If you use an "armed" gate file, enable it here (optional)
+ARM_FILE = os.getenv("HID_NETD_ARM_FILE", "/etc/usb-hid/ARMED")
+REQUIRE_ARMED = os.getenv("HID_NETD_REQUIRE_ARMED", "0") == "1"
+
+# --- Minimal HID keymap (US layout) ---
+# Modifier bits: 0x02 = Left Shift
+MOD_LSHIFT = 0x02
+
+KEYCODES: Dict[str, int] = {
+    'a': 0x04, 'b': 0x05, 'c': 0x06, 'd': 0x07, 'e': 0x08, 'f': 0x09,
+    'g': 0x0A, 'h': 0x0B, 'i': 0x0C, 'j': 0x0D, 'k': 0x0E, 'l': 0x0F,
+    'm': 0x10, 'n': 0x11, 'o': 0x12, 'p': 0x13, 'q': 0x14, 'r': 0x15,
+    's': 0x16, 't': 0x17, 'u': 0x18, 'v': 0x19, 'w': 0x1A, 'x': 0x1B,
+    'y': 0x1C, 'z': 0x1D,
+
+    '1': 0x1E, '2': 0x1F, '3': 0x20, '4': 0x21, '5': 0x22,
+    '6': 0x23, '7': 0x24, '8': 0x25, '9': 0x26, '0': 0x27,
+
+    ' ': 0x2C,
+    '\n': 0x28,  # Enter
+    '\t': 0x2B,  # Tab
+    '\b': 0x2A,  # Backspace
+
+    '-': 0x2D, '=': 0x2E, '[': 0x2F, ']': 0x30, '\\': 0x31,
+    ';': 0x33, "'": 0x34, '`': 0x35, ',': 0x36, '.': 0x37, '/': 0x38,
+}
+
+SHIFTED: Dict[str, str] = {
+    '!': '1', '@': '2', '#': '3', '$': '4', '%': '5', '^': '6', '&': '7', '*': '8', '(': '9', ')': '0',
+    '_': '-', '+': '=',
+    '{': '[', '}': ']',
+    '|': '\\',
+    ':': ';', '"': "'",
+    '~': '`',
+    '<': ',', '>': '.', '?': '/',
+}
+
+def hid_write_report(fd, mod: int, keycode: int) -> None:
+    # 8-byte boot keyboard report: [mod, 0, key1, key2, key3, key4, key5, key6]
+    fd.write(bytes([mod, 0, keycode, 0, 0, 0, 0, 0]))
+    fd.flush()
+
+def tap_key(fd, mod: int, keycode: int) -> None:
+    hid_write_report(fd, mod, keycode)   # press
+    hid_write_report(fd, 0, 0)           # release
+
+def char_to_hid(ch: str) -> Optional[tuple]:
+    # Returns (modifier, keycode) or None if unsupported
+    if ch in KEYCODES:
+        return (0, KEYCODES[ch])
+
+    if ch.isalpha():
+        # Uppercase -> shift + lowercase key
+        if ch.isupper():
+            base = ch.lower()
+            if base in KEYCODES:
+                return (MOD_LSHIFT, KEYCODES[base])
+        else:
+            if ch in KEYCODES:
+                return (0, KEYCODES[ch])
+        return None
+
+    if ch in SHIFTED:
+        base = SHIFTED[ch]
+        if base in KEYCODES:
+            return (MOD_LSHIFT, KEYCODES[base])
+    return None
+
+def is_armed() -> bool:
+    if not REQUIRE_ARMED:
+        return True
+    return os.path.exists(ARM_FILE)
+
+def handle_message(fd, msg: Dict) -> str:
+    if msg.get("token") != TOKEN:
+        return "ERR bad token"
+    if not is_armed():
+        return "ERR not armed"
+    op = msg.get("op")
+    if op == "type":
+        text = msg.get("text", "")
+        for ch in text:
+            mapped = char_to_hid(ch)
+            if mapped is None:
+                # ignore unknown characters for now
+                continue
+            mod, code = mapped
+            tap_key(fd, mod, code)
+        return "OK"
+    return "ERR unknown op"
+
+def main():
+    # Open HID device once
+    try:
+        fd = open(HIDDEV, "wb", buffering=0)
+    except Exception as e:
+        print(f"[hid-netd] Failed to open {HIDDEV}: {e}", file=sys.stderr)
+        sys.exit(1)
+
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as srv:
+        srv.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        srv.bind((LISTEN, PORT))
+        srv.listen(5)
+        print(f"[hid-netd] listening on {LISTEN}:{PORT}, HID={HIDDEV}")
+
+        while True:
+            conn, addr = srv.accept()
+            with conn:
+                try:
+                    data = b""
+                    while True:
+                        chunk = conn.recv(4096)
+                        if not chunk:
+                            break
+                        data += chunk
+                        while b"\n" in data:
+                            line, _, data = data.partition(b"\n")
+                            if not line.strip():
+                                continue
+                            msg = json.loads(line.decode("utf-8", errors="strict"))
+                            resp = handle_message(fd, msg)
+                            conn.sendall((resp + "\n").encode("utf-8"))
+                except Exception as e:
+                    # Don't kill the daemon on bad input
+                    try:
+                        conn.sendall((f"ERR {e}\n").encode("utf-8"))
+                    except Exception:
+                        pass
+
+if __name__ == "__main__":
+    main()
+PY
+
+sudo chmod 755 /opt/hid-netd/hid_netd.py
+```
+
+Getting things ready to run as a service, on the PI Zero...
 ```
 sudo mkdir -p /opt/hid-netd
 sudo chmod 755 /opt/hid-netd
 ```
 <br>
 
+Create the configuration file for the daemon, this can be tweaked or modified to meet your requirements, or you can just use it "as-is", this is a network service, so do think if this suits your environment. On the PI Zero, create to config as below either manually or via the below script
 ```
 sudo mkdir -p /etc/hid-netd
 sudo tee /etc/hid-netd/config.env >/dev/null <<'ENV'
