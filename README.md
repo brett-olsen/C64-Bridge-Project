@@ -181,9 +181,63 @@ then re-connect and execute:
 ```
 cat /sys/kernel/config/usb_gadget/g1/UDC
 ```
-If all is working, you should see an output similar to **3f980000.usb**<br><br>
+If all is working, you should see an output similar to **3f980000.usb**, congrats USB Gadget mode is enabled, thats the hard part done!<br><br>
+<br>
 
+**4) Install the PI Network Daemon**<br>
+First we need to create the configuration file for the daemon, this can be tweaked or modified to meet your requirements, or you can just use it "as-is", this is a network service, so do think if this suits your environment. On the PI Zero, create to config as below either manually or via the below script<br>
 
+```
+sudo mkdir -p /etc/hid-netd
+sudo tee /etc/hid-netd/config.env >/dev/null <<'ENV'
+HID_NETD_LISTEN=0.0.0.0
+HID_NETD_PORT=9999
+HID_NETD_TOKEN=ILoveMyCommodoreC64
+HID_DEVICE=/dev/hidg0
+ENV
+```
+<br>
 
+Once that is done, its time to configure the network service, either create the /etc/systemd/system/hid-netd.service file or use the below script
+```
+sudo tee /etc/systemd/system/hid-netd.service >/dev/null <<'UNIT'
+[Unit]
+Description=HID Network Daemon (types to /dev/hidg0)
+After=network-online.target usb-gadget-hid.service
+Wants=network-online.target usb-gadget-hid.service
+
+[Service]
+Type=simple
+EnvironmentFile=/etc/hid-netd/config.env
+WorkingDirectory=/opt/hid-netd
+ExecStart=/usr/bin/python3 /opt/hid-netd/hid_netd.py
+Restart=on-failure
+RestartSec=1
+
+[Install]
+WantedBy=multi-user.target
+UNIT
+```
+<br>
+
+Now enabled & start the service
+```
+sudo systemctl daemon-reload
+sudo systemctl enable --now hid-netd.service
+systemctl status hid-netd.service --no-pager
+```
+<br>
+you should see **enabled** in green, for the real test reboot your PI Zero
+
+Now enabled & start the service
+```
+sudo reboot
+```
+Re-connect to your PI Zero via SSH, then validate the following
+```
+systemctl status usb-gadget-hid.service --no-pager
+systemctl status hid-netd.service --no-pager
+cat /sys/kernel/config/usb_gadget/g1/UDC
+```
 
 
