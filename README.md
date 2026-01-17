@@ -439,3 +439,5 @@ cat /sys/kernel/config/usb_gadget/g1/UDC
 ```
 you should see lots of green text saying **active** and **enabled** if you do, then you have completed the Pi Zero portion of the setup and the hardest part is all done =)
 
+
+**TODO A simple hello world Python script**
