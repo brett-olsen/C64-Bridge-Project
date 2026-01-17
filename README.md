@@ -1,8 +1,6 @@
 
 <img width="1200" height="640" alt="project-banner" src="https://github.com/user-attachments/assets/0eba027b-ea53-477b-bc35-36416c591f5a" />
 
-**NOTE: THIS IS A DRAFT, I WILL FINISH THIS TOMMOROW AND UPLOAD THE SERIAL BRIDGE AND FINAL INSTRUCTIONS, WONT BE LONG =)**
-
 # C64-Bridge-Project
 A repo for the C64 Bridge Project, a wireless USB Keyboard/HID emulator for the Raspberry Pi Zero 2 W, with a Serial Emulator bridge (can be used with the VibeC64 Project, see https://github.com/bbence84/VibeC64)<br><br>
 
@@ -10,14 +8,20 @@ A repo for the C64 Bridge Project, a wireless USB Keyboard/HID emulator for the 
 This project is designed to allow for the remote transmission of keystrokes from a host computer, to the Raspberry Pi Zero 2 W, which then emulates a USB HID keyboard via gadget mode, and relays those keystrokes to the Commodore C64 Ultimate (see https://www.commodore.net/), while this project can have a myriad of uses, it is specifically designed to be a drop-in, zero-code addition to the VibeC64 Project (see https://github.com/bbence84/VibeC64) this then effectively gives VibeC64 the ability to remotely control the physical C64 Ultimate computer, coupled with a webcam, this allows VibeC64 to monitor, control and test basic applications plus games on a physical C64 Ultimate<br><br>
 **-- Please consider this project very alpha, it just works barely, and I’ll add more to it and make it more robust when I get time --**<br><br>
 
-**Software**<br>
-1 x Computer running some varient of Linux with Python + VibeC64 installed & working locally (I use arch)<br><br>
+**General Requirements**<br>
+1 x Computer running some varient of Linux with Python + VibeC64 installed & working locally (I use Arch Linux)<br>
+1 X Webcam setup and working with VibeC64 (this will let the AI "see" the C64 Ultimate)<br><br>
 
-**Hardware**<br>
+**C64 Bridge Hardware**<br>
 1 x Pi Zero 2 W<br>
 1 x micro-USB data cable<br>
 1 x OTG micro-USB shim<br>
 1 x micro SD card (at least 4 GB)<br><br>
+
+**C64 Bridge Software**<br>
+1 x Raspberry Pi imaging tool<br>
+1 x Copy of Raspberry Pi OS Lite (32-bit)<br><br>
+
 ****IMPORTANT** on the Raspberry Pi Zero 2 W, the ports are in the following order: POWER - DATA - HDMI**<br>
 During the configuration stages, it's totally fine to use the first port, power. When Gadget mode is enabled, and for HID/Keyboard emulation, you need to use the Data Port, this is the middle port, please also take some time to read the connection information below.
 
@@ -440,7 +444,65 @@ systemctl status usb-gadget-hid.service --no-pager
 systemctl status hid-netd.service --no-pager
 cat /sys/kernel/config/usb_gadget/g1/UDC
 ```
-you should see lots of green text saying **active** and **enabled** if you do, then you have completed the Pi Zero portion of the setup and the hardest part is all done =)
+you should see lots of green text saying **active** and **enabled** if you do, then you have completed the Pi Zero portion of the setup and the hardest part is all done =)<br><br>
+If you have not already, you can power down the Pi Zero via SSH, and plug in your OTG USB cable to middle port on the unit, this is the data port on the Raspberry Pi Zero.
+```
+sudo shutdown -h now
+```
+<br>
+
+Finally, to validate everything from top to bottom before moving onto the TTY emulator, power on the Pi Zero, with the data port connected to either a test PC or a Commodore C64 Ultimate then create and execute a simple test script to validate everything is working perfectly.
+```
+cat > hello-world.py <<'PY'
+#!/usr/bin/env python3
+import json
+import os
+import socket
+import sys
+
+HOST  = os.getenv("C64KBD_PI_HOST", "192.168.1.36")
+PORT  = int(os.getenv("C64KBD_PI_PORT", "9999"))
+TOKEN = os.getenv("C64KBD_TOKEN", "ILoveMyCommodoreC64")
+
+msg = {
+    "token": TOKEN,
+    "op": "type",
+    "text": "hello world\n",
+}
+
+data = (json.dumps(msg) + "\n").encode("utf-8")
+
+try:
+    with socket.create_connection((HOST, PORT), timeout=3) as s:
+        s.sendall(data)
+
+        # read one line reply (best-effort)
+        s.settimeout(3)
+        buf = b""
+        while b"\n" not in buf:
+            chunk = s.recv(4096)
+            if not chunk:
+                break
+            buf += chunk
+
+        resp = buf.decode("utf-8", errors="ignore").strip()
+        print(resp if resp else "OK (no response body)")
+except Exception as e:
+    print(f"ERROR: {e}", file=sys.stderr)
+    sys.exit(1)
+PY
+
+chmod +x hello-world.py
+
+```
+<br>
+Note: In this test script, we are setting 3 variables that would be unique to your particular setup. You need to adjust/tailor the below lines to suit, correctly setting the HOST, PORT & TOKEN variables.
+```
+HOST  = os.getenv("C64KBD_PI_HOST", "192.168.1.36")
+PORT  = int(os.getenv("C64KBD_PI_PORT", "9999"))
+TOKEN = os.getenv("C64KBD_TOKEN", "ILoveMyCommodoreC64")
+```
+<br>
 
 
 **TODO A simple hello world Python script**
