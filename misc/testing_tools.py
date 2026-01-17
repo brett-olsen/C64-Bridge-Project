@@ -159,7 +159,7 @@ def get_webcam_snapshot():
     if os.path.exists(absolute_path):
         os.remove(absolute_path)
 
-    #arch linux fix
+    # Arch Linux fix
     #camera = cv2.VideoCapture(int(usb_cam_index) + cv2.CAP_DSHOW)  
     camera = cv2.VideoCapture(int(usb_cam_index), cv2.CAP_V4L2)
 
