@@ -529,7 +529,7 @@ TOKEN = os.getenv("C64KBD_TOKEN", "ILoveMyCommodoreC64")
 
 # Each line ends with a carriage return (Enter)
 program = (
-    '10 print "i love my commodore"\n'
+    '10 print "i love my commodore";\n'
     '20 goto 10\n'
     'run\n'
 )
