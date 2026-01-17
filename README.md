@@ -1,5 +1,5 @@
 
-<img width="1200" height="640" alt="project-banner" src="https://github.com/user-attachments/assets/d79f426c-7a6e-44c8-abc1-ebfb68187f98" />
+<img width="1200" height="640" alt="project-banner" src="https://github.com/user-attachments/assets/5995fba6-93d7-47b5-b294-11b818a365b8" />
 
 
 # C64-Bridge-Project
@@ -10,7 +10,7 @@ This project is designed to allow for the remote transmission of keystrokes from
 **-- Please consider this project very alpha, it just works barely, and I’ll add more to it and make it more robust when I get time --**<br><br>
 
 **General Requirements**<br>
-1 x Computer running some varient of Linux with Python + VibeC64 installed & working locally (I use Arch Linux)<br>
+1 x Computer running some variant of Linux with Python + VibeC64 installed & working locally (I use Arch Linux)<br>
 1 X Webcam setup and working with VibeC64 (this will let the AI "see" the C64 Ultimate)<br><br>
 
 **C64 Bridge Hardware**<br>
@@ -23,7 +23,7 @@ This project is designed to allow for the remote transmission of keystrokes from
 1 x Raspberry Pi imaging tool<br>
 1 x Copy of Raspberry Pi OS Lite (32-bit)<br><br>
 
-****IMPORTANT** on the Raspberry Pi Zero 2 W, the ports are in the following order: POWER - DATA - HDMI**<br>
+**IMPORTANT** on the Raspberry Pi Zero 2 W, the ports are in the following order: POWER - DATA - HDMI**<br>
 During the configuration stages, it's totally fine to use the first port, power. When Gadget mode is enabled, and for HID/Keyboard emulation, you need to use the Data Port, this is the middle port, please also take some time to read the connection information below.<br><br>
 
 **NOTE: Be careful with physical connections, typically I used a USB power supply or a USB battery pack to keep the Pi running during configuration, while I am not an electronics engineer, I believe it is best practice to not have multiple cables connected, for example, do not power the Pi Zero and simultaneously connect a data cable to another computer unless you know what you are doing. During setup, 1 cable for power, during testing and during operation 1 cable for data/power seems to work well for this project. If you want to use two cables safely, I believe you need to ensure that the data cable's 5V is disconnected with either a data-only cable, or a 5V blocker. Be careful with your connections and devices! TL;DR only use 1 cable at a time =)**<br><br>
@@ -227,7 +227,7 @@ If all is working, you should see an output similar to **3f980000.usb**, Congrat
 <br>
 
 **4) Install the Pi Network Daemon**<br>
-First we need to create the Network daemon on the Pi Zero, then we will create a config file, setup a network service so everything runs after boot.<br>
+First we need to create the Network daemon on the Pi Zero, then we will create a config file, set up a network service so everything runs after boot.<br>
 
 Install the Network Daemon on the Pi Zero 
 ```
