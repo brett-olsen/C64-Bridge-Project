@@ -463,7 +463,7 @@ systemctl status hid-netd.service --no-pager
 ```
 <br>
 
-you should see **enabled** in green, for the real test Reboot your Pi Zero, if you see any errors you can use the following command to troubleshoot
+You should see **enabled** in green, for the real test Reboot your Pi Zero, if you see any errors you can use the following command to troubleshoot
 ```
 sudo journalctl -u hid-netd.service -n 50 --no-pager
 ```
@@ -709,7 +709,7 @@ misc
 **testing_tools.py** - is an updated version of the VibeC64 included tools/testing_tools.py, this has a very small one line fix to make the camera on VibeC64 work on my Linux desktop, if you intend to use the C64-Bridge-Project it is really important to have the camera working for the VibeC64 AI. The only change to this file is as follows:
 
 ```
-    #arch Linux fix
+    # Arch Linux fix
     #camera = cv2.VideoCapture(int(usb_cam_index) + cv2.CAP_DSHOW)  
     camera = cv2.VideoCapture(int(usb_cam_index), cv2.CAP_V4L2)
 ```
