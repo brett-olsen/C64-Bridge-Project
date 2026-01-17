@@ -32,7 +32,7 @@ During the configuration stages, it's totally fine to use the first port, power.
 
 
 > [!CAUTION]
-> NOTE: Be careful with physical connections, typically I used a USB power supply or a USB battery pack to keep the Pi running during configuration, while I am not an electronics engineer, I believe it is best practice to not have multiple cables connected, for example, do not power the Pi Zero and simultaneously connect a data cable to another computer unless you know what you are doing. During setup, 1 cable for power, during testing and during operation 1 cable for data/power seems to work well for this project. If you want to use two cables safely, I believe you need to ensure that the data cable's 5V is disconnected with either a data-only cable, or a 5V blocker. Be careful with your connections and devices! TL;DR only use 1 cable at a time =)
+> Be careful with physical connections, typically I used a USB power supply or a USB battery pack to keep the Pi running during configuration, while I am not an electronics engineer, I believe it is best practice to not have multiple cables connected, for example, do not power the Pi Zero and simultaneously connect a data cable to another computer unless you know what you are doing. During setup, 1 cable for power, during testing and during operation 1 cable for data/power seems to work well for this project. If you want to use two cables safely, I believe you need to ensure that the data cable's 5V is disconnected with either a data-only cable, or a 5V blocker. Be careful with your connections and devices! TL;DR only use 1 cable at a time =)
 <br>
 
 # Getting it up & running<br><br>
@@ -51,7 +51,7 @@ When the flashing of the Pi OS image has completed, insert the SD card and power
 
 **2) Getting the Pi Zero 2 W Running**<br>
 > [!NOTE]  
-> NOTE: The first boot of the Pi Zero 2 W may take some time, be patient =)
+> The first boot of the Pi Zero 2 W may take some time, be patient =)
 <br>
 Find the IP address of the Pi Zero from your router, or if mDNS works, SSH into your Pi Zero
 ```
@@ -429,7 +429,7 @@ ENV
 <br>
 
 > [!NOTE]  
-> SECURITY NOTE: HID_NETD_LISTEN=0.0.0.0 exposes the typing daemon to your network. Consider binding to your Pi’s LAN IP or firewalling port 9999.
+> HID_NETD_LISTEN=0.0.0.0 exposes the typing daemon to your network. Consider binding to your Pi’s LAN IP or firewalling port 9999.
 
 <br>
 
@@ -595,7 +595,7 @@ Execute one of the two above scripts, on your local PC
 <br>
 
 > [!NOTE]  
-> NOTE: In the above two test scripts, we are setting 3 variables that would be unique to your particular setup. You need to adjust/tailor the below lines to suit, **correctly setting the HOST, PORT & TOKEN** variables.
+> In the above two test scripts, we are setting 3 variables that would be unique to your particular setup. You need to adjust/tailor the below lines to suit, **correctly setting the HOST, PORT & TOKEN** variables.
 <br>
 
 ```
@@ -608,7 +608,7 @@ TOKEN = os.getenv("C64KBD_TOKEN", "ILoveMyCommodoreC64")
 **5) Install & Configure the C64 Bridge**<br>
 <br>
 > [!NOTE]  
-> NOTE: The final step, installing the C64 Bridge is only required if you want to use VibeC64, this will give the VibeC64's AI the ability to interact with the Commodore C64 Ultimate. This part of the guide assumes you have a working, locally installed copy of VibeC64 running on your PC.
+> The final step, installing the C64 Bridge is only required if you want to use VibeC64, this will give the VibeC64's AI the ability to interact with the Commodore C64 Ultimate. This part of the guide assumes you have a working, locally installed copy of VibeC64 running on your PC.
 
 <br>
 In this example, we will also assume your VibeC64 directory structure looks something like this:
@@ -665,7 +665,7 @@ Next, start another terminal window and start VibeC64 as usual, I personally use
 <br><br>
 
 > [!NOTE]  
-> NOTE: If you run VibeC64 inside a venv, run the bridge from the same environment (or ensure required Python packages are installed system-wide).
+> If you run VibeC64 inside a venv, run the bridge from the same environment (or ensure required Python packages are installed system-wide).
 
 <br>
 
