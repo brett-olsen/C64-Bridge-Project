@@ -450,8 +450,8 @@ sudo shutdown -h now
 ```
 <br>
 
-Finally, to validate everything from top to bottom before moving onto the TTY bridgge/emulator, power on the Pi Zero, with the data port connected to either a test PC or a Commodore C64 Ultimate then create and execute a simple test script to validate everything is working perfectly. There are two scripts, one "Hello World" or my personal favourite "I Love My Commodore" :D
-**OPTION A: Hello World**
+Finally, to validate everything from top to bottom before moving onto the TTY bridgge/emulator, power on the Pi Zero, with the data port connected to either a test PC or a Commodore C64 Ultimate then create and execute a simple test script to validate everything is working perfectly. There are two scripts, one "Hello World" or my personal favourite "I Love My Commodore" :D<br>
+OPTION A: Hello World
 ```
 cat > hello-world.py <<'PY'
 #!/usr/bin/env python3
@@ -496,13 +496,62 @@ chmod +x hello-world.py
 
 ```
 <br>
-OPTION B: Hello World
+**OPTION B: I Love My Commodore**
+
 ```
-hello there!
+cat > i-love-my-commodore.py <<'PY'
+#!/usr/bin/env python3
+import json
+import os
+import socket
+import sys
+
+HOST  = os.getenv("C64KBD_PI_HOST", "192.168.1.36")
+PORT  = int(os.getenv("C64KBD_PI_PORT", "9999"))
+TOKEN = os.getenv("C64KBD_TOKEN", "ILoveMyCommodoreC64")
+
+# Each line ends with a carriage return (Enter)
+program = (
+    '10 print "i love my commodore"\n'
+    '20 goto 10\n'
+    'run\n'
+)
+
+msg = {
+    "token": TOKEN,
+    "op": "type",
+    "text": program,
+}
+
+data = (json.dumps(msg) + "\n").encode("utf-8")
+
+try:
+    with socket.create_connection((HOST, PORT), timeout=3) as s:
+        s.sendall(data)
+
+        # read one line reply (best-effort)
+        s.settimeout(15)
+        buf = b""
+        while b"\n" not in buf:
+            chunk = s.recv(4096)
+            if not chunk:
+                break
+            buf += chunk
+
+        resp = buf.decode("utf-8", errors="ignore").strip()
+        print(resp if resp else "OK (no response body)")
+except Exception as e:
+    print(f"ERROR: {e}", file=sys.stderr)
+    sys.exit(1)
+PY
+
+chmod +x i-love-my-commodore.py
+
 ```
+
 <br>
 
-**Note:** In the above test script, we are setting 3 variables that would be unique to your particular setup. You need to adjust/tailor the below lines to suit, **correctly setting the HOST, PORT & TOKEN** variables.
+**Note:** In the above two test scripts, we are setting 3 variables that would be unique to your particular setup. You need to adjust/tailor the below lines to suit, **correctly setting the HOST, PORT & TOKEN** variables.
 ```
 HOST  = os.getenv("C64KBD_PI_HOST", "192.168.1.36")
 PORT  = int(os.getenv("C64KBD_PI_PORT", "9999"))
