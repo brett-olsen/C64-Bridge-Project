@@ -30,7 +30,10 @@ While this project can have a myriad of uses, it is specifically designed to be 
 **IMPORTANT** on the Raspberry Pi Zero 2 W, the ports are in the following order: **POWER - DATA - HDMI**<br>
 During the configuration stages, it's totally fine to use the first port, power. When Gadget mode is enabled, and for HID/Keyboard emulation, you need to use the data port, this is the middle port, please also take some time to read the connection information below.<br><br>
 
-**NOTE: Be careful with physical connections, typically I used a USB power supply or a USB battery pack to keep the Pi running during configuration, while I am not an electronics engineer, I believe it is best practice to not have multiple cables connected, for example, do not power the Pi Zero and simultaneously connect a data cable to another computer unless you know what you are doing. During setup, 1 cable for power, during testing and during operation 1 cable for data/power seems to work well for this project. If you want to use two cables safely, I believe you need to ensure that the data cable's 5V is disconnected with either a data-only cable, or a 5V blocker. Be careful with your connections and devices! TL;DR only use 1 cable at a time =)**<br><br>
+
+> [!CAUTION]
+> NOTE: Be careful with physical connections, typically I used a USB power supply or a USB battery pack to keep the Pi running during configuration, while I am not an electronics engineer, I believe it is best practice to not have multiple cables connected, for example, do not power the Pi Zero and simultaneously connect a data cable to another computer unless you know what you are doing. During setup, 1 cable for power, during testing and during operation 1 cable for data/power seems to work well for this project. If you want to use two cables safely, I believe you need to ensure that the data cable's 5V is disconnected with either a data-only cable, or a 5V blocker. Be careful with your connections and devices! TL;DR only use 1 cable at a time =)
+<br>
 
 # Getting it up & running<br><br>
 **1) Flash the Raspberry Pi OS**<br>
@@ -460,7 +463,7 @@ systemctl status hid-netd.service --no-pager
 
 you should see **enabled** in green, for the real test Reboot your Pi Zero
 
-Now enable and start the service
+Now reboot the Pi to test persistence (let's really check this, to make sure you won't have any problems downstream =))
 ```
 sudo reboot
 ```
@@ -688,7 +691,7 @@ misc
 
 **startup.sh** - is a bash script to launch VibeC64 on my Arch Linux computer, this script checks for and creates a virtual environment to safely run the correct/compatible version of Python with VibeC64, you don't need to use this, I just created it to easily manage and run VibeC64 locally on my Arch Linux desktop.<br><br>
 
-**testing_tools.py** - is an updated version of the VibeC64 included tools/testing_tools.py, this has a very small one line fix to make the camera on VibeC64 work on my linux destkop, if you intend to use the C64-Bridge-Project it is really important to have the camera working for the VibeC64 AI. The only change to this file is as follows:
+**testing_tools.py** - is an updated version of the VibeC64 included tools/testing_tools.py, this has a very small one line fix to make the camera on VibeC64 work on my linux desktop, if you intend to use the C64-Bridge-Project it is really important to have the camera working for the VibeC64 AI. The only change to this file is as follows:
 
 ```
     #arch linux fix
