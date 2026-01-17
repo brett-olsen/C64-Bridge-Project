@@ -670,6 +670,27 @@ Specifically:
 <img width="1184" height="997" alt="Screenshot_20260117_221310-1" src="https://github.com/user-attachments/assets/ab6163f4-f640-4426-a15f-a93d932c32fe" />
 <br>
 And thats it, you’re all done! You have configured your Pi Zero, installed the Network Daemon, configured the Serial Bridge and have VibeC64 connected to your Commodore C64 Ultimate, great work!<br>
-<br>
+<br><br>
 
 **6) MISC Tools & Arch/Linux Notes for VibeC64**<br>
+In this repo, there are currently two files in the misc directory, they are:<br>
+```
+misc
+├── startup.sh
+└── testing_tools.py
+```
+<br>
+
+**startup.sh** - is a bash script to launch VibeC64 on my Arch Linux computer, this script checks for and creates a virtual environment to safely run the correct/compatible version of Python with VibeC64, you don't need to use this, I just created it to easily manage and run VibeC64 locally on my Arch Linux desktop.<br><br>
+
+**testing_tools.py** - is an updated version of the VibeC64 included tools/testing_tools.py, this has a very small one line fix to make the camera on VibeC64 work on my linux destkop, if you intend to use the C64-Bridge-Project it is really important to have the camera working for the VibeC64 AI. The only change to this file is as follows:
+
+```
+    #arch linux fix
+    #camera = cv2.VideoCapture(int(usb_cam_index) + cv2.CAP_DSHOW)  
+    camera = cv2.VideoCapture(int(usb_cam_index), cv2.CAP_V4L2)
+```
+<br>
+This simple one line fix, swaps the capture device from DirectShow to a more linux compatible CAP_V4L2 capture interface. And that's it, now you know as much about VibeC64 as I do =D
+
+
