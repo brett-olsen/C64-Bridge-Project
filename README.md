@@ -658,4 +658,8 @@ Specifically:
 ```
 <br>
 <img width="1184" height="997" alt="Screenshot_20260117_221310-1" src="https://github.com/user-attachments/assets/ab6163f4-f640-4426-a15f-a93d932c32fe" />
+<br>
+And thats it, your all done! You have configured your Pi Zero, installed the Network Daemon, configured the Serial Bridge and have VibeC64 connected to your Commmodore C64 Ultimate, great work!<br>
 
+
+**6) MISC Tools & Arch/Linux Notes for VibeC64**<br>
