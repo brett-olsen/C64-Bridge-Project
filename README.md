@@ -12,7 +12,7 @@ While this project can have a myriad of uses, it is specifically designed to be 
 
 **General Requirements**<br>
 1 x Computer running some variant of Linux with Python + VibeC64 installed & working locally (I use Arch Linux)<br>
-1 X Webcam setup, and working with VibeC64 (this will let the AI "see" the C64 Ultimate)<br><br>
+1 x Webcam setup, and working with VibeC64 (this will let the AI "see" the C64 Ultimate)<br><br>
 
 **C64 Bridge Hardware**<br>
 1 x Pi Zero 2 W<br>
