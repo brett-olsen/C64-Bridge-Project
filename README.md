@@ -1,5 +1,6 @@
 
-<img width="1200" height="640" alt="project-banner" src="https://github.com/user-attachments/assets/0eba027b-ea53-477b-bc35-36416c591f5a" />
+<img width="1200" height="640" alt="project-banner" src="https://github.com/user-attachments/assets/d79f426c-7a6e-44c8-abc1-ebfb68187f98" />
+
 
 # C64-Bridge-Project
 A repo for the C64 Bridge Project, a wireless USB Keyboard/HID emulator for the Raspberry Pi Zero 2 W, with a Serial Emulator bridge (can be used with the VibeC64 Project, see https://github.com/bbence84/VibeC64)<br><br>
