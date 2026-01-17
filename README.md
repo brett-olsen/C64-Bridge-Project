@@ -50,7 +50,9 @@ When flashing the Pi OS be sure to set the following:<br>
 When the flashing of the Pi OS image has completed, insert the SD card and power on the Pi.<br><br>
 
 **2) Getting the Pi Zero 2 W Running**<br>
-NOTE: First boot of the Pi Zero 2 W may take some time, be patient =)<br><br>
+> [!NOTE]  
+> NOTE: The first boot of the Pi Zero 2 W may take some time, be patient =)
+<br>
 Find the IP address of the Pi Zero from your router, or if mDNS works, SSH into your Pi Zero
 ```
 ssh <user>@PiZero2W.local
@@ -482,6 +484,7 @@ sudo shutdown -h now
 
 Finally, to validate everything from top to bottom before moving onto the TTY bridge/emulator, power on the Pi Zero, with the data port connected to either a test PC or a Commodore C64 Ultimate then create and execute a simple test script to validate everything is working perfectly. There are two scripts, one "Hello World" or my personal favourite "I Love My Commodore" :D<br>
 **Run one of these test scripts on your host Linux PC (not on the Pi).**
+<br>
 **OPTION A: Hello World**
 ```
 cat > hello-world.py <<'PY'
@@ -591,7 +594,9 @@ Execute one of the two above scripts, on your local PC
 ```
 <br>
 
-**NOTE:** In the above two test scripts, we are setting 3 variables that would be unique to your particular setup. You need to adjust/tailor the below lines to suit, **correctly setting the HOST, PORT & TOKEN** variables.
+> [!NOTE]  
+> NOTE: In the above two test scripts, we are setting 3 variables that would be unique to your particular setup. You need to adjust/tailor the below lines to suit, **correctly setting the HOST, PORT & TOKEN** variables.
+<br>
 ```
 HOST  = os.getenv("C64KBD_PI_HOST", "192.168.1.36")
 PORT  = int(os.getenv("C64KBD_PI_PORT", "9999"))
@@ -601,8 +606,10 @@ TOKEN = os.getenv("C64KBD_TOKEN", "ILoveMyCommodoreC64")
 
 **5) Install & Configure the C64 Bridge**<br>
 <br>
-**NOTE:** The final step, installing the C64 Bridge is only required if you want to use VibeC64, this will give the VibeC64's AI the ability to interact with the Commodore C64 Ultimate. This part of the guide assumes you have a working, locally installed copy of VibeC64 running on your PC.<br>
+> [!NOTE]  
+> NOTE: The final step, installing the C64 Bridge is only required if you want to use VibeC64, this will give the VibeC64's AI the ability to interact with the Commodore C64 Ultimate. This part of the guide assumes you have a working, locally installed copy of VibeC64 running on your PC.
 
+<br>
 In this example, we will also assume your VibeC64 directory structure looks something like this:
 
 ```
@@ -656,7 +663,9 @@ Next, start another terminal window and start VibeC64 as usual, I personally use
 <img width="917" height="41" alt="Screenshot_20260117_214536" src="https://github.com/user-attachments/assets/f8d16af5-c0f8-4176-84a9-fa39706653e8" />
 <br><br>
 
-**NOTE: If you run VibeC64 inside a venv, run the bridge from the same environment (or ensure required Python packages are installed system-wide).**
+> [!NOTE]  
+> NOTE: If you run VibeC64 inside a venv, run the bridge from the same environment (or ensure required Python packages are installed system-wide).
+
 <br>
 
 If all is well, VibeC64 will launch in a browser window as normal, as part of the startup VibeC64 is going to display two important sanity checks we are interested in, in the below image we can see the following two lines:<br>
