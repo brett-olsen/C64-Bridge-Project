@@ -1,5 +1,5 @@
 
-<img width="1200" height="640" alt="project-banner" src="https://github.com/user-attachments/assets/5995fba6-93d7-47b5-b294-11b818a365b8" />
+<img width="1200" height="640" alt="project-banner" src="https://github.com/user-attachments/assets/db00506b-c779-4705-ae7e-92e98f4c3b8d" />
 
 
 # C64-Bridge-Project
