@@ -576,7 +576,10 @@ HOST  = os.getenv("C64KBD_PI_HOST", "192.168.1.36")
 PORT  = int(os.getenv("C64KBD_PI_PORT", "9999"))
 TOKEN = os.getenv("C64KBD_TOKEN", "ILoveMyCommodoreC64")
 ```
-<br>
+<br><br>
 
+**5) Install & Configure the C64 Bridge**<br>
+<br>
+TODO - Add the final steps to install & configure the bridge + setup and test VibeC64 AI =D
 
 
