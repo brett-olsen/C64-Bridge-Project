@@ -431,7 +431,7 @@ sudo systemctl enable --now hid-netd.service
 systemctl status hid-netd.service --no-pager
 ```
 <br>
-you should see **enabled** in green, for the real test Reboot your Pi Zero
+you should see enabled in green, for the real test Reboot your Pi Zero
 
 Now enable and start the service
 ```
@@ -450,7 +450,7 @@ sudo shutdown -h now
 ```
 <br>
 
-Finally, to validate everything from top to bottom before moving onto the TTY emulator, power on the Pi Zero, with the data port connected to either a test PC or a Commodore C64 Ultimate then create and execute a simple test script to validate everything is working perfectly.
+Finally, to validate everything from top to bottom before moving onto the TTY bridgge/emulator, power on the Pi Zero, with the data port connected to either a test PC or a Commodore C64 Ultimate then create and execute a simple test script to validate everything is working perfectly.
 ```
 cat > hello-world.py <<'PY'
 #!/usr/bin/env python3
