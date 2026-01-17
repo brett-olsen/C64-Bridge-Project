@@ -197,7 +197,7 @@ def main():
     print(" https://github.com/brett-olsen/C64-Bridge-Project/tree/main")
     print(" Version 0.1")
     print(" Created by Brett Olsen - 2026")
-    print("----------------------------------------------------------------------------------------------------------------------\n")
+    print(" ----------------------------------------------------------------------------------------------------------------------\n")
     print("Starting C64 keyboard bridge...")
     print(f"Repo root (via runner): {os.getenv('PYTHONPATH','').split(':')[0]}")
     print(f"App should use:   export C64_KEYBOARD_DEVICE_PORT={DEVICE_LINK}")
