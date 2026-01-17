@@ -8,7 +8,10 @@ A repo for the C64 Bridge Project, a wireless USB Keyboard/HID emulator for the 
 **What is this Project?**<br>
 This project is designed to allow for the remote transmission of keystrokes from a host computer, to the Raspberry Pi Zero 2 W, which then emulates a USB HID keyboard via gadget mode, and relays those keystrokes to the Commodore C64 Ultimate (see https://www.commodore.net/).<br><br>
 While this project can have a myriad of uses, it is specifically designed to be a drop-in, zero-code addition to the VibeC64 Project (see https://github.com/bbence84/VibeC64). This effectively gives VibeC64's AI the ability to remotely control the physical C64 Ultimate computer, coupled with a webcam, this allows VibeC64 to monitor, control and test basic applications plus games on a physical C64 Ultimate<br><br>
-**-- Please consider this project very alpha, it just works barely, and I’ll add more to it and make it more robust when I get time --**<br><br>
+
+> [!WARNING]
+> ** Please consider this project very alpha, it just works barely, and I’ll add more to it and make it more robust when I get time **
+<br>
 
 **General Requirements**<br>
 1 x Computer running some variant of Linux with Python + VibeC64 installed & working locally (I use Arch Linux)<br>
@@ -45,7 +48,7 @@ When the flashing of the Pi OS image has completed, insert the SD card and power
 
 **2) Getting the Pi Zero 2 W Running**<br>
 Note: First boot of the Pi Zero 2 W may take some time, be patient =)<br><br>
-Find the IP address of the Pi Zero from your router, or if mDNS works SSH into your Pi Zero
+Find the IP address of the Pi Zero from your router, or if mDNS works, SSH into your Pi Zero
 ```
 ssh <user>@PiZero2W.local
 # or
@@ -470,6 +473,7 @@ sudo shutdown -h now
 <br>
 
 Finally, to validate everything from top to bottom before moving onto the TTY bridge/emulator, power on the Pi Zero, with the data port connected to either a test PC or a Commodore C64 Ultimate then create and execute a simple test script to validate everything is working perfectly. There are two scripts, one "Hello World" or my personal favourite "I Love My Commodore" :D<br>
+**Run one of these test scripts on your host Linux PC (not on the Pi).**
 **OPTION A: Hello World**
 ```
 cat > hello-world.py <<'PY'
