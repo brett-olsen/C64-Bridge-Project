@@ -6,12 +6,13 @@
 A repo for the C64 Bridge Project, a wireless USB Keyboard/HID emulator for the Raspberry Pi Zero 2 W, with a Serial Emulator bridge (can be used with the VibeC64 Project, see https://github.com/bbence84/VibeC64)<br><br>
 
 **What is this Project?**<br>
-This project is designed to allow for the remote transmission of keystrokes from a host computer, to the Raspberry Pi Zero 2 W, which then emulates a USB HID keyboard via gadget mode, and relays those keystrokes to the Commodore C64 Ultimate (see https://www.commodore.net/), while this project can have a myriad of uses, it is specifically designed to be a drop-in, zero-code addition to the VibeC64 Project (see https://github.com/bbence84/VibeC64) this then effectively gives VibeC64's AI the ability to remotely control the physical C64 Ultimate computer, coupled with a webcam, this allows VibeC64 to monitor, control and test basic applications plus games on a physical C64 Ultimate<br><br>
+This project is designed to allow for the remote transmission of keystrokes from a host computer, to the Raspberry Pi Zero 2 W, which then emulates a USB HID keyboard via gadget mode, and relays those keystrokes to the Commodore C64 Ultimate (see https://www.commodore.net/).<br><br>
+While this project can have a myriad of uses, it is specifically designed to be a drop-in, zero-code addition to the VibeC64 Project (see https://github.com/bbence84/VibeC64) this then effectively gives VibeC64's AI the ability to remotely control the physical C64 Ultimate computer, coupled with a webcam, this allows VibeC64 to monitor, control and test basic applications plus games on a physical C64 Ultimate<br><br>
 **-- Please consider this project very alpha, it just works barely, and I’ll add more to it and make it more robust when I get time --**<br><br>
 
 **General Requirements**<br>
 1 x Computer running some variant of Linux with Python + VibeC64 installed & working locally (I use Arch Linux)<br>
-1 X Webcam setup and working with VibeC64 (this will let the AI "see" the C64 Ultimate)<br><br>
+1 X Webcam setup, and working with VibeC64 (this will let the AI "see" the C64 Ultimate)<br><br>
 
 **C64 Bridge Hardware**<br>
 1 x Pi Zero 2 W<br>
