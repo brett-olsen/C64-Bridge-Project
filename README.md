@@ -10,7 +10,7 @@ This project is designed to allow for the remote transmission of keystrokes from
 While this project can have a myriad of uses, it is specifically designed to be a drop-in, zero-code addition to the VibeC64 Project (see https://github.com/bbence84/VibeC64). This effectively gives VibeC64's AI the ability to remotely control the physical C64 Ultimate computer, coupled with a webcam, this allows VibeC64 to monitor, control and test basic applications plus games on a physical C64 Ultimate<br><br>
 
 > [!WARNING]
-> ** Please consider this project very alpha, it just works barely, and I’ll add more to it and make it more robust when I get time **
+> **Please consider this project very alpha, it just works barely, and I’ll add more to it and make it more robust when I get time**
 <br>
 
 **General Requirements**<br>
@@ -607,7 +607,7 @@ VibeC64
 ```
 <br>
 
-Intallation and setup of the C64 Serial Bridge is very straight forward, from this repo in the tools directory, you need the two files "run-c64kbd-bridge.sh" and "c64kbd_bridge.py", these files should be dropped into the VibeC64 tools directory. Inside the "run-c64kbd-bridge.sh" you can set the following variables, to suit your environment, **it is important to review and set the variables PI_IP, PI_PORT and TOKEN correctly**.
+Installation and setup of the C64 Serial Bridge is very straight forward, from this repo in the tools directory, you need the two files "run-c64kbd-bridge.sh" and "c64kbd_bridge.py", these files should be dropped into the VibeC64 tools directory. Inside the "run-c64kbd-bridge.sh" you can set the following variables, to suit your environment, **it is important to review and set the variables PI_IP, PI_PORT and TOKEN correctly**.
 
 ```
 # ---- EDIT THESE IF NEEDED ----
@@ -618,7 +618,7 @@ TOKEN="ILoveMyCommodoreC64"
 ```
 <br>
 
-Now that the C64 Bridge is correctly configured, we need to configure VibeC64 to use the serial bridge, in your VibceC64 directory, edit the file ".env", you must now configure VibeC64, the variable you need to set is **C64_KEYBOARD_DEVICE_PORT**, setting this value to /tmp/c64kb0 is the default, if you have changed this as part of your install, be sure to set it correctly. When you start the C64 Bridge, it will display the port you need, as such "Stable device path   : /tmp/c64kbd0"
+Now that the C64 Bridge is correctly configured, we need to configure VibeC64 to use the serial bridge, in your VibeC64 directory, edit the file ".env", you must now configure VibeC64, the variable you need to set is **C64_KEYBOARD_DEVICE_PORT**, setting this value to /tmp/c64kbd0 is the default, if you have changed this as part of your install, be sure to set it correctly. When you start the C64 Bridge, it will display the port you need, as such "Stable device path : /tmp/c64kbd0"
 ```
 # Optional: For direct HW access
 C64U_API_BASE_URL="http://192.168.1.29"
@@ -627,20 +627,30 @@ C64_KEYBOARD_DEVICE_PORT=/tmp/c64kbd0
 ```
 <br>
 
-The correct startup order for VibeC64 with the C64 Bridge is as follows, in a terminal window, change to your VibeC64 installation directory, then execute
+The correct startup order for VibeC64 with the C64 Bridge is as follows, in a terminal window, change to your VibeC64 installation directory, then set the cc64kbd-bridge.sh file executable, then launch script
 
 ```
-tools/run-c64kbd-bridge.sh
+chmod +x tools/run-c64kbd-bridge.sh
 ```
 
-Leave this console running, it will display any recieved and forwarded keystrokes for diagnostic/test purposes. You should see an output, similar to the following
+then
+
+```
+./tools/run-c64kbd-bridge.sh
+```
+
+Leave this console running, it will display any received and forwarded keystrokes for diagnostic/test purposes. You should see an output, similar to the following
 <img width="1550" height="912" alt="Screenshot_20260117_214113-1" src="https://github.com/user-attachments/assets/3267c7f4-a788-42ad-bfbd-e0940204655d" />
 
 
-Next, start another terminal window and start VibeC64 as usual, I personally use a script called "startup.sh" that ensures that Python is happy and running in a virtual environment, the "startup.sh" script is avaiable in the misc folder of this repo, if thats of some use to you. Regardless of how you launch it, you should see VibeC64 started as normal as below<br>
+Next, start another terminal window and start VibeC64 as usual, I personally use a script called "startup.sh" that ensures that Python is happy and running in a virtual environment, the "startup.sh" script is available in the misc folder of this repo, if thats of some use to you. Regardless of how you launch it, you should see VibeC64 started as normal as below<br>
 
 <img width="917" height="41" alt="Screenshot_20260117_214536" src="https://github.com/user-attachments/assets/f8d16af5-c0f8-4176-84a9-fa39706653e8" />
 <br><br>
+
+**NOTE: If you run VibeC64 inside a venv, run the bridge from the same environment (or ensure required Python packages are installed system-wide).**
+<br>
+
 If all is well, VibeC64 will launch in a browser window as normal, as part of the startup VibeC64 is going to display two important sanity checks we are interested in, in the below image we can see the following two lines:<br>
 ✓ C64 Keyboard connected - can send keypresses to real C64 hardware<br>
 ✓ Capture device connected - can capture screen from real C64 hardware<br><br>
@@ -659,7 +669,7 @@ Specifically:
 <br>
 <img width="1184" height="997" alt="Screenshot_20260117_221310-1" src="https://github.com/user-attachments/assets/ab6163f4-f640-4426-a15f-a93d932c32fe" />
 <br>
-And thats it, your all done! You have configured your Pi Zero, installed the Network Daemon, configured the Serial Bridge and have VibeC64 connected to your Commmodore C64 Ultimate, great work!<br>
+And thats it, you’re all done! You have configured your Pi Zero, installed the Network Daemon, configured the Serial Bridge and have VibeC64 connected to your Commodore C64 Ultimate, great work!<br>
 <br>
 
 **6) MISC Tools & Arch/Linux Notes for VibeC64**<br>
