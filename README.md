@@ -640,8 +640,22 @@ Leave this console running, it will display any recieved and forwarded keystroke
 Next, start another terminal window and start VibeC64 as usual, I personally use a script called "startup.sh" that ensures that Python is happy and running in a virtual environment, the "startup.sh" script is avaiable in the misc folder of this repo, if thats of some use to you. Regardless of how you launch it, you should see VibeC64 started as normal as below<br>
 
 <img width="917" height="41" alt="Screenshot_20260117_214536" src="https://github.com/user-attachments/assets/f8d16af5-c0f8-4176-84a9-fa39706653e8" />
+<br><br>
+If all is well, VibeC64 will launch in a browser window as normal, as part of the startup VibeC64 is going to display two important sanity checks we are interested in, in the below image we can see the following two lines:<br>
+✓ C64 Keyboard connected - can send keypresses to real C64 hardware<br>
+✓ Capture device connected - can capture screen from real C64 hardware<br><br>
 
-If all is well, VibeC64 
+<img width="1184" height="997" alt="Screenshot_20260117_214809" src="https://github.com/user-attachments/assets/6939fdb0-bc50-4bd1-9fcf-b9e0e38783e9" />
 
+Now we can simply interact with the VibeC64's AI, to do the last sanity check, simply ask the AI to "test that you can see the screen and use the keyboard", if all works you should see an output similar to the following, 
 
+```
+Based on the image provided, the request is accurately reflected on the Commodore 64 screen.
+Specifically:
+ 1. Command entered: PRINT "VIBE" is visible on the fourth line of the system text area.
+ 2. Execution: Below the command, the string VIBE is displayed, confirming the command was executed in direct mode.
+ 3. Prompt: The system has returned to a READY. state with the cursor blinking below the output.
+```
+<br>
+<img width="1184" height="997" alt="Screenshot_20260117_221310-1" src="https://github.com/user-attachments/assets/ab6163f4-f640-4426-a15f-a93d932c32fe" />
 
