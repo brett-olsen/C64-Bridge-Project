@@ -495,7 +495,8 @@ chmod +x hello-world.py
 
 ```
 <br>
-Note: In this test script, we are setting 3 variables that would be unique to your particular setup. You need to adjust/tailor the below lines to suit, correctly setting the HOST, PORT & TOKEN variables.
+
+**Note:** In the above test script, we are setting 3 variables that would be unique to your particular setup. You need to adjust/tailor the below lines to suit, **correctly setting the HOST, PORT & TOKEN** variables.
 ```
 HOST  = os.getenv("C64KBD_PI_HOST", "192.168.1.36")
 PORT  = int(os.getenv("C64KBD_PI_PORT", "9999"))
@@ -504,4 +505,4 @@ TOKEN = os.getenv("C64KBD_TOKEN", "ILoveMyCommodoreC64")
 <br>
 
 
-**TODO A simple hello world Python script**
+
