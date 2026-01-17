@@ -496,7 +496,7 @@ chmod +x hello-world.py
 
 ```
 <br>
-**OPTION B: I Love My Commodore**
+OPTION B: I Love My Commodore (my personal favourite :D)
 
 ```
 cat > i-love-my-commodore.py <<'PY'
