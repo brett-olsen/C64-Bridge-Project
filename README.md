@@ -7,7 +7,7 @@ A repo for the C64 Bridge Project, a wireless USB Keyboard/HID emulator for the 
 
 **What is this Project?**<br>
 This project is designed to allow for the remote transmission of keystrokes from a host computer, to the Raspberry Pi Zero 2 W, which then emulates a USB HID keyboard via gadget mode, and relays those keystrokes to the Commodore C64 Ultimate (see https://www.commodore.net/).<br><br>
-While this project can have a myriad of uses, it is specifically designed to be a drop-in, zero-code addition to the VibeC64 Project (see https://github.com/bbence84/VibeC64) this then effectively gives VibeC64's AI the ability to remotely control the physical C64 Ultimate computer, coupled with a webcam, this allows VibeC64 to monitor, control and test basic applications plus games on a physical C64 Ultimate<br><br>
+While this project can have a myriad of uses, it is specifically designed to be a drop-in, zero-code addition to the VibeC64 Project (see https://github.com/bbence84/VibeC64). This effectively gives VibeC64's AI the ability to remotely control the physical C64 Ultimate computer, coupled with a webcam, this allows VibeC64 to monitor, control and test basic applications plus games on a physical C64 Ultimate<br><br>
 **-- Please consider this project very alpha, it just works barely, and I’ll add more to it and make it more robust when I get time --**<br><br>
 
 **General Requirements**<br>
@@ -25,7 +25,7 @@ While this project can have a myriad of uses, it is specifically designed to be 
 1 x Copy of Raspberry Pi OS Lite (32-bit)<br><br>
 
 **IMPORTANT** on the Raspberry Pi Zero 2 W, the ports are in the following order: **POWER - DATA - HDMI**<br>
-During the configuration stages, it's totally fine to use the first port, power. When Gadget mode is enabled, and for HID/Keyboard emulation, you need to use the Data Port, this is the middle port, please also take some time to read the connection information below.<br><br>
+During the configuration stages, it's totally fine to use the first port, power. When Gadget mode is enabled, and for HID/Keyboard emulation, you need to use the data port, this is the middle port, please also take some time to read the connection information below.<br><br>
 
 **NOTE: Be careful with physical connections, typically I used a USB power supply or a USB battery pack to keep the Pi running during configuration, while I am not an electronics engineer, I believe it is best practice to not have multiple cables connected, for example, do not power the Pi Zero and simultaneously connect a data cable to another computer unless you know what you are doing. During setup, 1 cable for power, during testing and during operation 1 cable for data/power seems to work well for this project. If you want to use two cables safely, I believe you need to ensure that the data cable's 5V is disconnected with either a data-only cable, or a 5V blocker. Be careful with your connections and devices! TL;DR only use 1 cable at a time =)**<br><br>
 
@@ -530,7 +530,7 @@ HOST  = os.getenv("C64KBD_PI_HOST", "192.168.1.36")
 PORT  = int(os.getenv("C64KBD_PI_PORT", "9999"))
 TOKEN = os.getenv("C64KBD_TOKEN", "ILoveMyCommodoreC64")
 
-# Each line ends with a carriage return (Enter)
+# Each line ends with Enter
 program = (
     '10 print "i love my commodore";\n'
     '20 goto 10\n'
@@ -569,6 +569,14 @@ chmod +x i-love-my-commodore.py
 
 ```
 
+<br>
+Execute one of the two above scripts, on your local PC
+
+```
+./hello-world.py
+# or
+./i-love-my-commodore.py
+```
 <br>
 
 **Note:** In the above two test scripts, we are setting 3 variables that would be unique to your particular setup. You need to adjust/tailor the below lines to suit, **correctly setting the HOST, PORT & TOKEN** variables.
