@@ -1,3 +1,6 @@
+
+<img width="1200" height="640" alt="project-banner" src="https://github.com/user-attachments/assets/83c740ac-c1b5-45d4-b58c-3ec058ecff5a" />
+
 **NOTE: THIS IS A DRAFT, I WILL FINISH THIS TOMMOROW AND UPLOAD THE SERIAL BRIDGE AND FINAL INSTRUCTIONS, WONT BE LONG =)**
 
 # C64-Bridge-Project
