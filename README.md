@@ -450,7 +450,8 @@ sudo shutdown -h now
 ```
 <br>
 
-Finally, to validate everything from top to bottom before moving onto the TTY bridgge/emulator, power on the Pi Zero, with the data port connected to either a test PC or a Commodore C64 Ultimate then create and execute a simple test script to validate everything is working perfectly.
+Finally, to validate everything from top to bottom before moving onto the TTY bridgge/emulator, power on the Pi Zero, with the data port connected to either a test PC or a Commodore C64 Ultimate then create and execute a simple test script to validate everything is working perfectly. There are two scripts, one "Hello World" or my personal favourite "I Love My Commodore" :D
+**OPTION A: Hello World**
 ```
 cat > hello-world.py <<'PY'
 #!/usr/bin/env python3
@@ -493,6 +494,11 @@ PY
 
 chmod +x hello-world.py
 
+```
+<br>
+OPTION B: Hello World
+```
+hello there!
 ```
 <br>
 
