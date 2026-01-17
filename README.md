@@ -706,14 +706,14 @@ misc
 
 **startup.sh** - is a bash script to launch VibeC64 on my Arch Linux computer, this script checks for and creates a virtual environment to safely run the correct/compatible version of Python with VibeC64, you don't need to use this, I just created it to easily manage and run VibeC64 locally on my Arch Linux desktop.<br><br>
 
-**testing_tools.py** - is an updated version of the VibeC64 included tools/testing_tools.py, this has a very small one line fix to make the camera on VibeC64 work on my linux desktop, if you intend to use the C64-Bridge-Project it is really important to have the camera working for the VibeC64 AI. The only change to this file is as follows:
+**testing_tools.py** - is an updated version of the VibeC64 included tools/testing_tools.py, this has a very small one line fix to make the camera on VibeC64 work on my Linux desktop, if you intend to use the C64-Bridge-Project it is really important to have the camera working for the VibeC64 AI. The only change to this file is as follows:
 
 ```
-    #arch linux fix
+    #arch Linux fix
     #camera = cv2.VideoCapture(int(usb_cam_index) + cv2.CAP_DSHOW)  
     camera = cv2.VideoCapture(int(usb_cam_index), cv2.CAP_V4L2)
 ```
 <br>
-This simple one line fix, swaps the capture device from DirectShow to a more linux compatible CAP_V4L2 capture interface. And that's it, now you know as much about VibeC64 as I do =D
+This simple one line fix, swaps the capture device from DirectShow to a more Linux compatible CAP_V4L2 capture interface. And that's it, now you know as much about VibeC64 as I do =D
 
 
