@@ -245,6 +245,8 @@ sudo tee /opt/hid-netd/hid_netd.py >/dev/null <<'PY'
 # ----------------------------------------------------------------------------------------------------------------------
 # C64-Bridge-Project: A wireless USB Keyboard/HID emulator for the Raspberry Pi Zero 2 W, with a Serial Emulator bridge
 # (can be used with the VibeC64 Project, see https://github.com/bbence84/VibeC64)
+#
+# https://github.com/brett-olsen/C64-Bridge-Project/tree/main
 # Version 0.1
 # Created by Brett Olsen - 2026
 # ----------------------------------------------------------------------------------------------------------------------
