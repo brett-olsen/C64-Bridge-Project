@@ -47,7 +47,7 @@ When flashing the Pi OS be sure to set the following:<br>
 When the flashing of the Pi OS image has completed, insert the SD card and power on the Pi.<br><br>
 
 **2) Getting the Pi Zero 2 W Running**<br>
-Note: First boot of the Pi Zero 2 W may take some time, be patient =)<br><br>
+NOTE: First boot of the Pi Zero 2 W may take some time, be patient =)<br><br>
 Find the IP address of the Pi Zero from your router, or if mDNS works, SSH into your Pi Zero
 ```
 ssh <user>@PiZero2W.local
@@ -583,7 +583,7 @@ Execute one of the two above scripts, on your local PC
 ```
 <br>
 
-**Note:** In the above two test scripts, we are setting 3 variables that would be unique to your particular setup. You need to adjust/tailor the below lines to suit, **correctly setting the HOST, PORT & TOKEN** variables.
+**NOTE:** In the above two test scripts, we are setting 3 variables that would be unique to your particular setup. You need to adjust/tailor the below lines to suit, **correctly setting the HOST, PORT & TOKEN** variables.
 ```
 HOST  = os.getenv("C64KBD_PI_HOST", "192.168.1.36")
 PORT  = int(os.getenv("C64KBD_PI_PORT", "9999"))
@@ -593,6 +593,55 @@ TOKEN = os.getenv("C64KBD_TOKEN", "ILoveMyCommodoreC64")
 
 **5) Install & Configure the C64 Bridge**<br>
 <br>
-TODO - Add the final steps to install & configure the bridge + setup and test VibeC64 AI =D
+**NOTE:** The final step, installing the C64 Bridge is only required if you want to use VibeC64, this will give the VibeC64's AI the ability to interact with the Commodore C64 Ultimate. This part of the guide assumes you have a working, locally installed copy of VibeC64 running on your PC.<br>
+
+In this example, we will also assume your VibeC64 directory structure looks something like this:
+
+```
+VibeC64
+├── output
+├── public
+├── resources
+├── tools
+└── utils
+```
+<br>
+
+Intallation and setup of the C64 Serial Bridge is very straight forward, from this repo in the tools directory, you need the two files "run-c64kbd-bridge.sh" and "c64kbd_bridge.py", these files should be dropped into the VibeC64 tools directory. Inside the "run-c64kbd-bridge.sh" you can set the following variables, to suit your environment, **it is important to review and set the variables PI_IP, PI_PORT and TOKEN correctly**.
+
+```
+# ---- EDIT THESE IF NEEDED ----
+PI_IP="192.168.1.36"
+PI_PORT="9999"
+TOKEN="ILoveMyCommodoreC64"
+# ------------------------------
+```
+<br>
+
+Now that the C64 Bridge is correctly configured, we need to configure VibeC64 to use the serial bridge, in your VibceC64 directory, edit the file ".env", you must now configure VibeC64, the variable you need to set is **C64_KEYBOARD_DEVICE_PORT**, setting this value to /tmp/c64kb0 is the default, if you have changed this as part of your install, be sure to set it correctly. When you start the C64 Bridge, it will display the port you need, as such "Stable device path   : /tmp/c64kbd0"
+```
+# Optional: For direct HW access
+C64U_API_BASE_URL="http://192.168.1.29"
+USB_CAMERA_INDEX=0
+C64_KEYBOARD_DEVICE_PORT=/tmp/c64kbd0
+```
+<br>
+
+The correct startup order for VibeC64 with the C64 Bridge is as follows, in a terminal window, change to your VibeC64 installation directory, then execute
+
+```
+tools/run-c64kbd-bridge.sh
+```
+
+Leave this console running, it will display any recieved and forwarded keystrokes for diagnostic/test purposes. You should see an output, similar to the following
+<img width="1550" height="912" alt="Screenshot_20260117_214113-1" src="https://github.com/user-attachments/assets/3267c7f4-a788-42ad-bfbd-e0940204655d" />
+
+
+Next, start another terminal window and start VibeC64 as usual, I personally use a script called "startup.sh" that ensures that Python is happy and running in a virtual environment, the "startup.sh" script is avaiable in the misc folder of this repo, if thats of some use to you. Regardless of how you launch it, you should see VibeC64 started as normal as below<br>
+
+<img width="917" height="41" alt="Screenshot_20260117_214536" src="https://github.com/user-attachments/assets/f8d16af5-c0f8-4176-84a9-fa39706653e8" />
+
+If all is well, VibeC64 
+
 
 
