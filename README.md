@@ -423,6 +423,11 @@ ENV
 ```
 <br>
 
+> [!NOTE]  
+> SECURITY NOTE: HID_NETD_LISTEN=0.0.0.0 exposes the typing daemon to your network. Consider binding to your Pi’s LAN IP or firewalling port 9999.
+
+<br>
+
 Once that is done, it’s time to configure the network service, either create the /etc/systemd/system/hid-netd.service file or use the below script
 ```
 sudo tee /etc/systemd/system/hid-netd.service >/dev/null <<'UNIT'
@@ -627,7 +632,7 @@ C64_KEYBOARD_DEVICE_PORT=/tmp/c64kbd0
 ```
 <br>
 
-The correct startup order for VibeC64 with the C64 Bridge is as follows, in a terminal window, change to your VibeC64 installation directory, then set the cc64kbd-bridge.sh file executable, then launch script
+The correct startup order for VibeC64 with the C64 Bridge is as follows, in a terminal window, change to your VibeC64 installation directory, then set the **run-c64kbd-bridge.sh** file executable, then launch script
 
 ```
 chmod +x tools/run-c64kbd-bridge.sh
