@@ -597,6 +597,7 @@ Execute one of the two above scripts, on your local PC
 > [!NOTE]  
 > NOTE: In the above two test scripts, we are setting 3 variables that would be unique to your particular setup. You need to adjust/tailor the below lines to suit, **correctly setting the HOST, PORT & TOKEN** variables.
 <br>
+
 ```
 HOST  = os.getenv("C64KBD_PI_HOST", "192.168.1.36")
 PORT  = int(os.getenv("C64KBD_PI_PORT", "9999"))
