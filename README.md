@@ -23,10 +23,8 @@ This project is designed to allow for the remote transmission of keystrokes from
 1 x Copy of Raspberry Pi OS Lite (32-bit)<br><br>
 
 ****IMPORTANT** on the Raspberry Pi Zero 2 W, the ports are in the following order: POWER - DATA - HDMI**<br>
-During the configuration stages, it's totally fine to use the first port, power. When Gadget mode is enabled, and for HID/Keyboard emulation, you need to use the Data Port, this is the middle port, please also take some time to read the connection information below.
+During the configuration stages, it's totally fine to use the first port, power. When Gadget mode is enabled, and for HID/Keyboard emulation, you need to use the Data Port, this is the middle port, please also take some time to read the connection information below.<br><br>
 
-Optional<br>
-1 x micro-USB cable for power/setup<br><br>
 **NOTE: Be careful with physical connections, typically I used a USB power supply or a USB battery pack to keep the Pi running during configuration, while I am not an electronics engineer, I believe it is best practice to not have multiple cables connected, for example, do not power the Pi Zero and simultaneously connect a data cable to another computer unless you know what you are doing. During setup, 1 cable for power, during testing and during operation 1 cable for data/power seems to work well for this project. If you want to use two cables safely, I believe you need to ensure that the data cable's 5V is disconnected with either a data-only cable, or a 5V blocker. Be careful with your connections and devices! TL;DR only use 1 cable at a time =)**<br><br>
 
 # Getting it up & running<br><br>
