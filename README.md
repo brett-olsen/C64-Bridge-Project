@@ -25,7 +25,7 @@ While this project can have a myriad of uses, it is specifically designed to be 
 1 x micro SD card (at least 4 GB)<br>
 1 x Pi Zero 2 W Case (optional)  [(example)](https://core-electronics.com.au/slim-case-for-raspberry-pi-zero.html)<br>
 1 x micro-USB data/power cable (optional)  [(example)](https://core-electronics.com.au/usb-cable-type-a-to-micro-b-1m.html)<br>
-- The OTG micro-USB shim works with the Male to Male Cable to deliver data, you could source a single cable to do both, however this is all I could source locally<br>
+<sub>- The OTG micro-USB shim works with the Male to Male Cable to deliver data, you could source a single cable to do both, however this is all I could source locally<br></sub>
 <br>
 
 **C64 Bridge Software**<br>
