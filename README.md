@@ -25,7 +25,7 @@ While this project can have a myriad of uses, it is specifically designed to be 
 1 x micro SD card (at least 4 GB)<br>
 1 x Pi Zero 2 W Case (optional)  [(example)](https://core-electronics.com.au/slim-case-for-raspberry-pi-zero.html)<br>
 1 x micro-USB data/power cable (optional)  [(example)](https://core-electronics.com.au/usb-cable-type-a-to-micro-b-1m.html)<br>
-<sub>- The OTG micro-USB shim works with the Male to Male Cable to deliver data, you could source a single cable to do both, however this is all I could source locally<br></sub>
+<sub>- The OTG micro-USB shim works with the USB A Male to Male Cable to deliver data, you could source a single cable to do both, however this is all I could source locally<br></sub>
 <br>
 
 **C64 Bridge Software**<br>
@@ -68,7 +68,8 @@ When the flashing of the Pi OS image has completed, insert the SD card and power
 > [!NOTE]  
 > The first boot of the Pi Zero 2 W may take some time, be patient =)
 <br>
-Find the IP address of the Pi Zero from your router, or if mDNS works, SSH into your Pi Zero
+Find the IP address of the Pi Zero from your router, or if mDNS works, SSH into your Pi Zero<br>
+
 ```
 ssh <user>@PiZero2W.local
 # or
@@ -444,7 +445,7 @@ ENV
 <br>
 
 > [!NOTE]  
-> HID_NETD_LISTEN=0.0.0.0 exposes the typing daemon to your network. Consider binding to your Pi’s LAN IP or firewalling port 9999.
+> HID_NETD_LISTEN=0.0.0.0 exposes the daemon to your network. Consider binding to your Pi’s LAN IP or firewalling port 9999.
 
 <br>
 
@@ -502,9 +503,9 @@ sudo shutdown -h now
 ```
 <br>
 
-Finally, to validate everything from top to bottom before moving onto the TTY bridge/emulator, power on the Pi Zero, with the data port connected to either a test PC or a Commodore C64 Ultimate then create and execute a simple test script to validate everything is working perfectly. There are two scripts, one "Hello World" or my personal favourite "I Love My Commodore" :D<br>
+Finally, to validate everything from top to bottom before moving onto the TTY bridge/emulator, power on the Pi Zero, with the data port connected to either a test PC or a Commodore C64 Ultimate then create and execute a simple test script to validate everything is working perfectly. There are two scripts, one "Hello World" or my personal favourite "I Love My Commodore" :D<br><br>
 **Run one of these test scripts on your host Linux PC (not on the Pi).**
-<br>
+<br><br>
 **OPTION A: Hello World**
 ```
 cat > hello-world.py <<'PY'
