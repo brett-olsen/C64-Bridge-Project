@@ -21,6 +21,7 @@ While this project can have a myriad of uses, it is specifically designed to be 
 **C64 Bridge Hardware**<br>
 1 x Pi Zero 2 W  [(example)](https://core-electronics.com.au/raspberry-pi-zero-2-w-wireless-soldered-male-headers.html)<br>
 1 x OTG micro-USB shim  [(example)](https://core-electronics.com.au/tiny-otg-adapter-usb-micro-to-usb.html)<br>
+1 x Pi Zero 2 W Case (optional)  [(example)](https://core-electronics.com.au/slim-case-for-raspberry-pi-zero.html)<br>
 1 x micro-USB data cable (optional)  [(example)](https://core-electronics.com.au/usb-cable-type-a-to-micro-b-1m.html)<br>
 1 x micro SD card (at least 4 GB)<br><br>
 
