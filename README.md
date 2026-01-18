@@ -36,6 +36,15 @@ During the configuration stages, it's totally fine to use the first port, power.
 > Be careful with physical connections, typically I used a USB power supply or a USB battery pack to keep the Pi running during configuration, while I am not an electronics engineer, I believe it is best practice to not have multiple cables connected, for example, do not power the Pi Zero and simultaneously connect a data cable to another computer unless you know what you are doing. During setup, 1 cable for power, during testing and during operation 1 cable for data/power seems to work well for this project. If you want to use two cables safely, I believe you need to ensure that the data cable's 5V is disconnected with either a data-only cable, or a 5V blocker. Be careful with your connections and devices! TL;DR only use 1 cable at a time =)
 <br>
 
+
+flowchart LR
+  PC["Host PC<br/>Linux + VibeC64<br/>c64kbd_bridge.py"] -->|TCP 9999<br/>JSON lines| PI["Pi Zero 2 W<br/>hid-netd.service<br/>writes /dev/hidg0"]
+  PI -->|USB Gadget HID<br/>(appears as keyboard)| C64["C64 Ultimate<br/>(or test PC)"]
+  PC --- CAM["Webcam<br/>USB capture"]
+  CAM --> PC
+
+
+
 # Getting it up & running<br><br>
 **1) Flash the Raspberry Pi OS**<br>
 I personally used the Raspberry Pi Imager over at https://github.com/raspberrypi/rpi-imager, however any of the popular Raspberry Pi flashing tools will work (see https://www.raspberrypi.com/software/), for a number of reasons and for increased compatibility I used the following image:<br><br>
