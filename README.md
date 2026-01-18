@@ -37,13 +37,6 @@ During the configuration stages, it's totally fine to use the first port, power.
 <br>
 
 
-flowchart LR
-  PC["Host PC\nLinux + VibeC64\nc64kbd_bridge.py"] -->|TCP 9999\nJSON lines| PI["Pi Zero 2 W\nhid-netd.service\nwrites /dev/hidg0"]
-  PI -->|USB Gadget HID\n(appears as keyboard)| C64["C64 Ultimate\n(or test PC)"]
-  PC --- CAM["Webcam\nUSB capture"]
-  CAM --> PC
-
-
 # Getting it up & running<br><br>
 **1) Flash the Raspberry Pi OS**<br>
 I personally used the Raspberry Pi Imager over at https://github.com/raspberrypi/rpi-imager, however any of the popular Raspberry Pi flashing tools will work (see https://www.raspberrypi.com/software/), for a number of reasons and for increased compatibility I used the following image:<br><br>
