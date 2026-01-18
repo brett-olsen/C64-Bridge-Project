@@ -38,11 +38,10 @@ During the configuration stages, it's totally fine to use the first port, power.
 
 
 flowchart LR
-  PC["Host PC<br/>Linux + VibeC64<br/>c64kbd_bridge.py"] -->|TCP 9999<br/>JSON lines| PI["Pi Zero 2 W<br/>hid-netd.service<br/>writes /dev/hidg0"]
-  PI -->|USB Gadget HID<br/>(appears as keyboard)| C64["C64 Ultimate<br/>(or test PC)"]
-  PC --- CAM["Webcam<br/>USB capture"]
+  PC["Host PC\nLinux + VibeC64\nc64kbd_bridge.py"] -->|TCP 9999\nJSON lines| PI["Pi Zero 2 W\nhid-netd.service\nwrites /dev/hidg0"]
+  PI -->|USB Gadget HID\n(appears as keyboard)| C64["C64 Ultimate\n(or test PC)"]
+  PC --- CAM["Webcam\nUSB capture"]
   CAM --> PC
-
 
 
 # Getting it up & running<br><br>
