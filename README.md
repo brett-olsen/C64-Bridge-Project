@@ -19,9 +19,9 @@ While this project can have a myriad of uses, it is specifically designed to be 
 1 x Commodore 64 Ultimate (Gideon's Ultimate64 Elite-II motherboard should be fine too, but is unconfirmed)<br><br>
 
 **C64 Bridge Hardware**<br>
-1 x Pi Zero 2 W<br>
-1 x micro-USB data cable<br>
-1 x OTG micro-USB shim<br>
+1 x Pi Zero 2 W  [(example)](https://core-electronics.com.au/raspberry-pi-zero-2-w-wireless-soldered-male-headers.html)<br>
+1 x OTG micro-USB shim  [(example)](https://core-electronics.com.au/tiny-otg-adapter-usb-micro-to-usb.html)<br>
+1 x micro-USB data cable (optional)  [(example)](https://core-electronics.com.au/usb-cable-type-a-to-micro-b-1m.html)<br>
 1 x micro SD card (at least 4 GB)<br><br>
 
 **C64 Bridge Software**<br>
@@ -35,6 +35,15 @@ During the configuration stages, it's totally fine to use the first port, power.
 > [!CAUTION]
 > Be careful with physical connections, typically I used a USB power supply or a USB battery pack to keep the Pi running during configuration, while I am not an electronics engineer, I believe it is best practice to not have multiple cables connected, for example, do not power the Pi Zero and simultaneously connect a data cable to another computer unless you know what you are doing. During setup, 1 cable for power, during testing and during operation 1 cable for data/power seems to work well for this project. If you want to use two cables safely, I believe you need to ensure that the data cable's 5V is disconnected with either a data-only cable, or a 5V blocker. Be careful with your connections and devices! TL;DR only use 1 cable at a time =)
 <br>
+
+
+
+```mermaid
+flowchart LR
+  PC["Host PC<br/>Linux + VibeC64<br/>c64kbd_bridge.py"] -->|"TCP 9999<br/>JSON lines"| PI["Pi Zero 2 W<br/>hid-netd.service<br/>writes /dev/hidg0"]
+  PI -->|"USB Gadget HID<br/>(appears as keyboard)"| C64["C64 Ultimate<br/>(or test PC)"]
+  CAM["Webcam<br/>USB capture"] --> PC
+```
 
 
 # Getting it up & running<br><br>
