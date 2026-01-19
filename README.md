@@ -686,7 +686,7 @@ Next, start another terminal window and start VibeC64 as usual, I personally use
 <br><br>
 
 > [!NOTE]  
-> If you run VibeC64 inside a venv, run the bridge from the same environment (or ensure required Python packages are installed system-wide).
+> If you run VibeC64 inside a python virtual environment(venv), run the bridge from the same environment (or ensure required Python packages are installed system-wide).
 
 <br>
 
