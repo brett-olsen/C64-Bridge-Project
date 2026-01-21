@@ -763,7 +763,7 @@ As an example, here are my customised settings for my Logitech, Inc. HD Pro Webc
 > ```
 
 <br>
-The one line fix, swaps the capture device from DirectShow to a more Linux compatible CAP_V4L2 capture interface, properly setting your camera to the correct/maximum resolution will improve text recognition for the AI Model's.<br><br>
+The one line fix, swaps the capture device from DirectShow to a more Linux compatible CAP_V4L2 capture interface, properly setting your camera to the correct/maximum resolution will also improve text recognition for the AI Model's.<br><br>
 
 And that's it, now you know as much about VibeC64 as I do =D
 
