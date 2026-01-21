@@ -690,11 +690,13 @@ Next, start another terminal window and start VibeC64 as usual, I personally use
 
 <br>
 
-If all is well, VibeC64 will launch in a browser window as normal, as part of the startup VibeC64 is going to display two important sanity checks we are interested in, in the below image we can see the following two lines:<br>
+If all is well, VibeC64 will launch in a browser window as normal, as part of the startup VibeC64 is going to display three important sanity checks we are interested in, in the below image we can see the following three lines:<br>
+✓ Commodore 64 Ultimate connected - ready to run programs directly on real C64 hardware<br>
 ✓ C64 Keyboard connected - can send keypresses to real C64 hardware<br>
 ✓ Capture device connected - can capture screen from real C64 hardware<br><br>
 
-<img width="1184" height="997" alt="Screenshot_20260117_214809" src="https://github.com/user-attachments/assets/6939fdb0-bc50-4bd1-9fcf-b9e0e38783e9" />
+<img width="1184" height="997" alt="Screenshot_20260121_143032" src="https://github.com/user-attachments/assets/830debba-906a-4d3d-ad8c-b54ef5f60c03" />
+
 
 Now we can simply interact with the VibeC64's AI, to do the last sanity check, simply ask the AI to "test that you can see the screen and use the keyboard", if all works you should see an output similar to the following, 
 
