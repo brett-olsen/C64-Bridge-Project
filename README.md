@@ -756,8 +756,14 @@ As an example, here are my customised settings for my Logitech, Inc. HD Pro Webc
 
 <br>
 
+> [!TIP]
+> If you have v4l-utils installed, and assuming your capture device is at index 0, you can use the following command to get a list of your video capture device capabilities:
+> ```    
+> v4l2-ctl --device /dev/video0 --list-formats-ext
+> ```
 
-The one line fix, swaps the capture device from DirectShow to a more Linux compatible CAP_V4L2 capture interface whereas properly setting your camera to the correct/maximum resolution will improve text recognition for the AI Model's.<br><br>
+<br>
+The one line fix, swaps the capture device from DirectShow to a more Linux compatible CAP_V4L2 capture interface, properly setting your camera to the correct/maximum resolution will improve text recognition for the AI Model's.<br><br>
 
 And that's it, now you know as much about VibeC64 as I do =D
 
