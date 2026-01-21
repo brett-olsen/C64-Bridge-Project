@@ -158,24 +158,32 @@ def get_webcam_snapshot():
     # Delete image if it already exists
     if os.path.exists(absolute_path):
         os.remove(absolute_path)
-
+    
     # Arch Linux fix
-    #camera = cv2.VideoCapture(int(usb_cam_index) + cv2.CAP_DSHOW)  
+    #camera = cv2.VideoCapture(int(usb_cam_index) + cv2.CAP_DSHOW)
     camera = cv2.VideoCapture(int(usb_cam_index), cv2.CAP_V4L2)
 
     if not camera.isOpened():
         logger.warning(f"Could not open webcam with index {usb_cam_index}.")
         return None
-   
-    camera.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
-    camera.set(cv2.CAP_PROP_FRAME_HEIGHT, 960)
+
+    # default settings
+    #camera.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
+    #camera.set(cv2.CAP_PROP_FRAME_HEIGHT, 960)
+    #camera.set(cv2.CAP_PROP_AUTOFOCUS, 1)  # Enable autofocus
+    #camera.set(cv2.CAP_PROP_AUTO_EXPOSURE, 1)  # Enable auto-exposure (0.25 or 1 depending on camera)
+    #camera.set(cv2.CAP_PROP_AUTO_WB, 1)  # Enable auto white balance
+
+    # customised settings
+    camera.set(cv2.CAP_PROP_FRAME_WIDTH, 1920)
+    camera.set(cv2.CAP_PROP_FRAME_HEIGHT, 1080)
     camera.set(cv2.CAP_PROP_AUTOFOCUS, 1)  # Enable autofocus
     camera.set(cv2.CAP_PROP_AUTO_EXPOSURE, 1)  # Enable auto-exposure (0.25 or 1 depending on camera)
     camera.set(cv2.CAP_PROP_AUTO_WB, 1)  # Enable auto white balance
 
+
     # Give camera time to initialize after setting properties
-    time.sleep(1.0)
-    #time.sleep(0.5)
+    time.sleep(0.5)
 
     # Warm up the camera with multiple frame captures
     for i in range(5):  # Increased from 15 to 30 frames
@@ -183,10 +191,8 @@ def get_webcam_snapshot():
         if not temp_ret:
             logger.warning(f"Failed to read warm-up frame {i+1}")
         time.sleep(0.1)  # 100ms delay between frames for camera adjustment
-        #time.sleep(0.2)  # 200ms delay between frames for camera adjustment
 
-    time.sleep(1.0)
-    #time.sleep(0.5)
+    time.sleep(0.5)
 
     # Now take the actual photo
     return_value, image = camera.read()
