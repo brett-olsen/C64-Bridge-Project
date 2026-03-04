@@ -10,6 +10,7 @@ This project is designed to allow for the remote transmission of keystrokes from
 While this project can have a myriad of uses, it is specifically designed to be a drop-in, zero-code addition to the VibeC64 Project (see https://github.com/bbence84/VibeC64). This effectively gives VibeC64's AI the ability to remotely control the physical C64 Ultimate computer, coupled with a webcam, this allows VibeC64 to monitor, control and test basic applications plus games on a physical C64 Ultimate<br><br>
 
 **Watch a quick tutorial on how to build out the C64-Bridge-Project**
+
 [![Watch the video](https://img.youtube.com/vi/6MuolTkmxsA/hqdefault.jpg)](https://www.youtube.com/watch?v=6MuolTkmxsA)
 
 
