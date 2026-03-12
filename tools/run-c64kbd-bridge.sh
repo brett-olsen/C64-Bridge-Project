@@ -19,9 +19,10 @@
 set -euo pipefail
 
 # ---- EDIT THESE IF NEEDED ----
-PI_IP="192.168.1.36"
-PI_PORT="9999"
-TOKEN="ILoveMyCommodoreC64"
+# Note defining the config variables here will overwrite the variables used in the python code
+#PI_IP="192.168.1.36"
+#PI_PORT="9999"
+#TOKEN="ILoveMyCommodoreC64"
 # ------------------------------
 
 # Determine repo root (parent of tools/)
